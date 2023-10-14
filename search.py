@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
 # قم بفتح ملف HTML
-with open('movie1.html', 'r', encoding='utf-8') as html_file:
+with open('Telebox Movies.html', 'r', encoding='utf-8') as html_file:
     soup = BeautifulSoup(html_file, 'html.parser')
 
 # الكلمة التي تبحث عنها
