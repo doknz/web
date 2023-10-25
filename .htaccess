@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^Animes Telebox Animes.html [NC]
