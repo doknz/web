@@ -81,5 +81,6 @@ adDiv.id = 'advertisement'; // يمكنك تغيير هذا إلى الهوية 
 // قم بتخصيص نص الإعلان والمحتوى
 adDiv.innerHTML = '<p>هذا هو الإعلان الخاص بنا!</p>';
 
-// أضف العنصر إلى صفحة الويب
-document.body.appendChild(adDiv);
+// أضف العنصر إلى العنصر الذي تم إنشاؤه بواسطة السكريبت الأصلي
+var container = document.getElementById('container-b648da115a008d9509a7fac590057c1b');
+container.appendChild(adDiv);
