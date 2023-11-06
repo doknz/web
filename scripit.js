@@ -84,3 +84,8 @@ adDiv.innerHTML = '<p>هذا هو الإعلان الخاص بنا!</p>';
 // أضف العنصر إلى العنصر الذي تم إنشاؤه بواسطة السكريبت الأصلي
 var container = document.getElementById('container-b648da115a008d9509a7fac590057c1b');
 container.appendChild(adDiv);
+
+
+
+<script async="async" data-cfasync="false" src="//pl21174538.toprevenuegate.com/b648da115a008d9509a7fac590057c1b/invoke.js"></script>
+<div id="container-b648da115a008d9509a7fac590057c1b"></div>
