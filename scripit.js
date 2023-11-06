@@ -74,18 +74,3 @@ document.getElementById("nextNewsButton").addEventListener("click", function () 
 
 
 
-// انشئ عنصر div لعرض الإعلان
-var adDiv = document.createElement('div');
-adDiv.id = 'advertisement'; // يمكنك تغيير هذا إلى الهوية أو الفئة التي تريدها
-
-// قم بتخصيص نص الإعلان والمحتوى
-adDiv.innerHTML =//pl21174538.toprevenuegate.com/b648da115a008d9509a7fac590057c1b/invoke.js '<p>هذا هو الإعلان الخاص بنا!</p>';
-
-// أضف العنصر إلى العنصر الذي تم إنشاؤه بواسطة السكريبت الأصلي
-var container = document.getElementById('container-b648da115a008d9509a7fac590057c1b');
-container.appendChild(adDiv);
-
-
-
-<script async="async" data-cfasync="false" src="//pl21174538.toprevenuegate.com/b648da115a008d9509a7fac590057c1b/invoke.js"></script>
-<div id="container-b648da115a008d9509a7fac590057c1b"></div>
