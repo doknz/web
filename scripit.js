@@ -73,4 +73,13 @@ document.getElementById("nextNewsButton").addEventListener("click", function () 
 
 
 
+<script async="async" data-cfasync="false" src="//pl21174538.toprevenuegate.com/b648da115a008d9509a7fac590057c1b/invoke.js"></script>
+<div id="container-b648da115a008d9509a7fac590057c1b">
+  <!-- هذا هو الإعلان الذي تريده -->
+  <p>هذا هو الإعلان الخاص بنا!</p>
+</div>
+
+
+
+
 
