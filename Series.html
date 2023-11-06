@@ -233,3 +233,27 @@
 </body>
 </head>
                 </html>
+
+
+
+
+<html>
+<head>
+    <title>صفحة الثاني</title>
+</head>
+<body>
+    <h1>مرحبًا بك في الصفحة الثانية</h1>
+
+    <!-- مكان عرض الإعلان -->
+    <div id="advertisement-container"></div>
+
+    <!-- سكربت لاسترجاع الإعلان من ملف الفهرس -->
+    <script>
+        var advertisementCode = localStorage.getItem("advertisementCode");
+        var advertisementContainer = document.getElementById("advertisement-container");
+        if (advertisementCode) {
+            advertisementContainer.innerHTML = advertisementCode;
+        }
+    </script>
+</body>
+</html>
