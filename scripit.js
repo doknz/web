@@ -79,7 +79,7 @@ var adDiv = document.createElement('div');
 adDiv.id = 'advertisement'; // يمكنك تغيير هذا إلى الهوية أو الفئة التي تريدها
 
 // قم بتخصيص نص الإعلان والمحتوى
-adDiv.innerHTML = '<p>هذا هو الإعلان الخاص بنا!</p>';
+adDiv.innerHTML =//pl21174538.toprevenuegate.com/b648da115a008d9509a7fac590057c1b/invoke.js '<p>هذا هو الإعلان الخاص بنا!</p>';
 
 // أضف العنصر إلى العنصر الذي تم إنشاؤه بواسطة السكريبت الأصلي
 var container = document.getElementById('container-b648da115a008d9509a7fac590057c1b');
