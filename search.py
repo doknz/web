@@ -24,10 +24,10 @@ else:
 
 
 # قراءة الإعلانات من ملف الـ index
-with open('index.txt', 'r') as index_file:
+with open('index.html', 'r') as index_file:
     ads_from_index = index_file.read()
 
 # عرض الإعلانات في ملف الـ Series
-with open('Series.txt', 'w') as series_file:
+with open('Series.html', 'w') as series_file:
     series_file.write(ads_from_index)
 
