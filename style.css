@@ -60,7 +60,7 @@ input[type="submit"] {
 
 
 
-a[href^="pl21174538.toprevenuegate.com/b648da115a008d9509a7fac590057c1b/invoke.js/"] {
-    border: none !important;
-    background-color: none !important;
+/* استهداف المربعات الحمراء في الصفحة "Advertisements Page" */
+body > div#container-b648da115a008d9509a7fac590057c1b {
+    display: none;
 }
