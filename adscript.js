@@ -5,7 +5,7 @@ script1.async = true;
 script1.setAttribute('data-cfasync', 'false');
 document.body.appendChild(script1);
 
-// السكريبت الثاني
+// انشئ عنصر div لعرض الإعلان
 var adDiv = document.createElement('div');
 adDiv.id = 'advertisement'; // يمكنك تغيير هذا إلى الهوية أو الفئة التي تريدها
 
