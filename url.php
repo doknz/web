@@ -71,13 +71,3 @@ if ( !class_exists('WPForceLowercaseURLs') ) {
 
 
 
-
-<?php
-$requestedPath = $_SERVER['REQUEST_URI'];
-$normalizedPath = strtolower($requestedPath);
-
-if ($normalizedPath !== $requestedPath) {
-    header('Location: http://movieloz.com' . $normalizedPath);
-    exit();
-}
-?>
