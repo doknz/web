@@ -67,7 +67,3 @@ if ( !class_exists('WPForceLowercaseURLs') ) {
   WPForceLowercaseURLs::init();
 
 }
-
-
-
-
