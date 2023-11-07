@@ -70,16 +70,5 @@ document.getElementById("nextNewsButton").addEventListener("click", function () 
 
 
 
-```javascript
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request))
-})
-
-async function handleRequest(request) {
-  const url = new URL(request.url)
-  const newURL = url.origin + url.pathname.toLowerCase()
-  return Response.redirect(newURL, 301)
-}
-```
 
 
