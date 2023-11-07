@@ -22,3 +22,6 @@ RewriteRule (.*) ${uc:$1} [R=301,L]
 
 RewriteEngine On
 RewriteRule ^series$ /Series [NC,L]
+
+
+ErrorDocument 404 /index.html
