@@ -67,3 +67,17 @@ if ( !class_exists('WPForceLowercaseURLs') ) {
   WPForceLowercaseURLs::init();
 
 }
+
+
+
+
+
+<?php
+$requestedPath = $_SERVER['REQUEST_URI'];
+$normalizedPath = strtolower($requestedPath);
+
+if ($normalizedPath !== $requestedPath) {
+    header('Location: http://movieloz.com' . $normalizedPath);
+    exit();
+}
+?>
