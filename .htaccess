@@ -25,3 +25,9 @@ RewriteRule ^series$ /Series [NC,L]
 
 
 ErrorDocument 404 /index.html
+
+
+
+RewriteEngine On
+RewriteRule ^index$ / [R=301,L]
+
