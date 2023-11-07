@@ -18,3 +18,7 @@ RewriteCond %{REQUEST_URI} [a-z]
 RewriteRule (.*) ${uc:$1} [R=301,L]
 
 
+
+
+RewriteEngine On
+RewriteRule ^series$ /Series [NC,L]
