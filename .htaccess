@@ -19,7 +19,5 @@ RewriteRule ^(.*)$ ${lc:$1}
 
 RewriteEngine On
 RewriteBase /
-
-# تحويل جميع الحروف الكبيرة في ال URL إلى حروف صغيرة
 RewriteCond %{REQUEST_URI} [A-Z]
 RewriteRule (.*) ${lc:$1} [R=301,L]
