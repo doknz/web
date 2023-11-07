@@ -63,16 +63,17 @@ document.getElementById("nextNewsButton").addEventListener("click", function () 
     showCurrentNews();
 });
 
-module.exports = {
-  async redirects() {
-    return [
-      {
-        source: '/about',
-        destination: '/',
-        permanent: true,
-      },
-    ]
-  },
+import { useEffect } from "react"
+import { useRouter } from "next/router"
+
+export default function Custom404() {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.replace("/")
+  })
+
+  return null
 }
 
 
