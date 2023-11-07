@@ -12,12 +12,3 @@ RewriteRule ^(.*)$ $1.html [NC,L]
 
 
 
-RewriteEngine on
-RewriteMap lc int:tolower
-RewriteRule ^(.*)$ ${lc:$1}
-
-
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_URI} [A-Z]
-RewriteRule (.*) ${lc:$1} [R=301,L]
