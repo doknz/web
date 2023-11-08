@@ -22,5 +22,5 @@ RewriteRule (.*) ${uc:$1} [R=301,L]
 
 
 RewriteEngine On
-RewriteRule ^index$ / [R=301,L]
+RewriteRule ^index$ / [L]
 
