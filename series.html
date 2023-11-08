@@ -9,25 +9,6 @@
     <script src=".htaccess" defer></script>
 
 
-<script>
-  // ابحث عن جميع الروابط في الصفحة
-  var links = document.querySelectorAll("a");
-
-  // قم بتكرار الروابط وجعلها حساسة لحالة الأحرف
-  links.forEach(function(link) {
-    link.addEventListener("click", function(event) {
-      // تأكد من أن الرابط حساس لحالة الأحرف
-      if (event.target.href.toLowerCase() !== event.target.href) {
-        event.preventDefault(); // إيقاف تنفيذ الرابط الأصلي
-        window.location = event.target.href.toLowerCase(); // إعادة توجيه إلى الرابط بحالة الأحرف الصغيرة
-      }
-    });
-  });
-</script>
-
-
-
-
     <style>
         /* الأسلوب العام للصفحة */
         body {
