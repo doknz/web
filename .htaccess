@@ -19,4 +19,7 @@ RewriteRule (.*) ${uc:$1} [R=301,L]
 
 
 
+Redirect 301 /index.html /
+
+
 
