@@ -19,6 +19,8 @@ RewriteRule (.*) ${uc:$1} [R=301,L]
 
 
 
-Redirect @ /index /
 
+
+RewriteEngine On
+RewriteRule ^index$ / [R=301,L]
 
