@@ -1,151 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movieloz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="لأحدث الأفلام والمسلسلات">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="scripit.js" defer></script>
 <script src=".htaccess" defer></script>
-  <title>معلومات المشاهدة</title>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f8f8f8;
-    }
-    .header {
-      background-color: #333;
-      color: red;
-      text-align: center;
-      padding: 10px;
-      width: 100%;
-      box-sizing: border-box;
-      font-size: 18px;
-    }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding-top: 20px;
-    }
-    .return-box {
-      width: 300px;
-      height: 50px;
-      background-color: #FE0000; /* لون الزر للرجوع */
-      margin-bottom: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      overflow: hidden;
-      text-align: center;
-      border-radius: 8px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .return-box:hover {
-      background-color: #FFD700; /* تغيير لون الزر عند التحويل */
-    }
-    .box {
-      width: 300px;
-      height: 50px;
-      background-color: #FE0000; /* لون أحمر للمربع */
-      margin-bottom: 20px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      overflow: hidden;
-      text-align: center;
-      border-radius: 8px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .box.active {
-      background-color: #FFD700;
-      color: #000;
-    }
-    .hidden-info {
-      display: none;
-      padding: 10px;
-      background-color: #f0f0f0;
-      width: 250px;
-      text-align: center;
-      border-radius: 12px;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-      margin-top: -20px; /* الارتفاع أعلى المربع السابق */
-    }
-    .box.active + .hidden-info {
-      display: none;
-    }
-    h3 {
-      margin: 0;
-    }
-  </style>
+
+    <style>
+        /* الأسلوب العام للصفحة */
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            background-image: url('background.jpg'); /* رابط الصورة الخلفية */
+            background-size: cover; /* لتغطية الشاشة بالكامل */
+            background-repeat: no-repeat; /* لعدم تكرار الصورة */
+            background-attachment: fixed; /* تجعل الصورة ثابتة عند التمرير */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ترويسة الموقع */
+        header {
+            background-color: #333;
+            color: hsl(0, 94%, 46%);
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* عنوان الصفحة */
+        h1 {
+            margin: 0;
+        }
+
+        /* منطقة العرض للأفلام والمسلسلات */
+        .content {
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* توسيط المحتوى */
+        }
+
+        /* قائمة لعرض الأفلام والمسلسلات */
+        .movie-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: center; /* توسيط العناصر */
+        }
+
+        .movie-item {
+            margin: 10px;
+        }
+
+        /* المربعات الحمراء */
+        a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: red;
+            transition: background-color 0.3s;
+            font-size: 25px; /* تكبير حجم الخط داخل المربعات الحمراء */
+        }
+
+        a:hover {
+            background-color: gold;
+        }
+
+        /* توسيط عنوان الأفلام والمسلسلات والالانمي */
+        h2 {
+            text-align: center;
+        }
+
+        /* مربع البحث */
+        .search-box {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%; /* يمتلئ عرض الشاشة بالكامل */
+            max-width: 300px; /* حد أقصى لعرض المربع */
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* تعديل للشاشات الصغيرة (تقنية التجاوب) */
+        @media (max-width: 600px) {
+            h2 {
+                font-size: 24px; /* تصغير حجم العنوان للهواتف الصغيرة */
+            }
+            .search-box {
+                margin-top: 10px;
+            }
+        }
+    </style>
+    <!-- تضمين الخط العربي Tajawal -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400&display=swap">
 </head>
 <body>
-
-<div class="header">
-  <h1>movieloz</h1>
+    <header>
+        <h1>movieloz</h1>
+    </header>
+    <div class="content">
+        <h2>اكبر موقع فهرسه بالوطن العربي</h2>
+<div class="faq-box">
+    <!-- Your FAQ content goes here -->
 </div>
 
-<div class="container">
-  <div class="return-box" onclick="goHome()">
-    <h3>رجوع للصفحة الرئيسية</h3>
-  </div>
-
-  <div class="box" onclick="showInfo(this)">
-    <h3>عنوان المعلومات الأولى</h3>
-  </div>
-
-  <div class="hidden-info">
-    <h3>المعلومات الأولى عن طريقة المشاهدة</h3>
-  </div>
-
-  <div class="box" onclick="showInfo(this)" style="margin-top: 10px; display: flex; justify-content: center;">
-    <h3>عنوان المعلومات الثانية</h3>
-  </div>
-
-  <div class="hidden-info">
-    <h3>المعلومات الثانية عن طريقة المشاهدة</h3>
-  </div>
-
-  <!-- هنا يمكنك إضافة المزيد من المربعات -->
-
-</div>
-
-<script>
-  document.addEventListener('mousedown', function(event) {
-    const boxes = document.querySelectorAll('.box');
-    boxes.forEach(box => {
-      if (!box.contains(event.target)) {
-        box.classList.remove('active');
-      }
-    });
-  });
-
-  function showInfo(element) {
-    const hiddenInfo = element.nextElementSibling;
-    const boxes = document.querySelectorAll('.hidden-info');
-    boxes.forEach(box => {
-      if (box !== hiddenInfo) {
-        box.style.display = 'none';
-      }
-    });
-    hiddenInfo.style.display = hiddenInfo.style.display === 'block' ? 'none' : 'block';
-    element.classList.toggle('active');
-  }
-
-  function goHome() {
-    window.location.href = "/"; // تغيير الرابط إلى الرابط الخاص بك
-  }
-</script>
-
+<script src="scripit.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
