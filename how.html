@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معلومات المشاهدة</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+    }
+    .header {
+      background-color: #333;
+      color: red;
+      text-align: center;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 18px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding-top: 20px;
+    }
+    .return-box {
+      width: 300px;
+      height: 50px;
+      background-color: #FE0000; /* لون الزر للرجوع */
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .return-box:hover {
+      background-color: #FFD700; /* تغيير لون الزر عند التحويل */
+    }
+    .box {
+      width: 300px;
+      height: 50px;
+      background-color: #FE0000; /* لون أحمر للمربع */
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      overflow: hidden;
+      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .box.active {
+      background-color: #FFD700;
+      color: #000;
+    }
+    .hidden-info {
+      display: none;
+      padding: 10px;
+      background-color: #f0f0f0;
+      width: 250px;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      margin-top: -20px; /* الارتفاع أعلى المربع السابق */
+    }
+    .box.active + .hidden-info {
+      display: none;
+    }
+    h3 {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>movieloz</h1>
+</div>
+
+<div class="container">
+  <div class="return-box" onclick="goHome()">
+    <h3>رجوع للصفحة الرئيسية</h3>
+  </div>
+
+  <div class="box" onclick="showInfo(this)">
+    <h3>عنوان المعلومات الأولى</h3>
+  </div>
+
+  <div class="hidden-info">
+    <h3>المعلومات الأولى عن طريقة المشاهدة</h3>
+  </div>
+
+  <div class="box" onclick="showInfo(this)" style="margin-top: 40px; display: flex; justify-content: center;">
+    <h3>عنوان المعلومات الثانية</h3>
+  </div>
+
+  <div class="hidden-info">
+    <h3>المعلومات الثانية عن طريقة المشاهدة</h3>
+  </div>
+
+  <!-- هنا يمكنك إضافة المزيد من المربعات -->
+
+</div>
+
+<script>
+  document.addEventListener('mousedown', function(event) {
+    const boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => {
+      if (!box.contains(event.target)) {
+        box.classList.remove('active');
+      }
+    });
+  });
+
+  function showInfo(element) {
+    const hiddenInfo = element.nextElementSibling;
+    const boxes = document.querySelectorAll('.hidden-info');
+    boxes.forEach(box => {
+      if (box !== hiddenInfo) {
+        box.style.display = 'none';
+      }
+    });
+    hiddenInfo.style.display = hiddenInfo.style.display === 'block' ? 'none' : 'block';
+    element.classList.toggle('active');
+  }
+
+  function goHome() {
+    window.location.href = "https://www.example.com"; // تغيير الرابط إلى الرابط الخاص بك
+  }
+</script>
+
+</body>
+</html>
