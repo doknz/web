@@ -1,0 +1,22 @@
+name: Replace Word in HTML
+
+on:
+  push:
+    branches:
+      - main # يمكنك تغيير اسم الفرع هنا
+
+jobs:
+  replace-word:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies # تثبيت الأدوات اللازمة
+        run: npm install -g replace-in-file-cli # استخدم npm أو أي أداة تثبيت تفضلها
+
+      - name: Search and Replace # البحث والاستبدال
+        run: |
+          replace-in-file --from "movieloz" --to "Movieloz" --glob="*.html" . # استبدال الكلمة في ملفات HTML
+          
