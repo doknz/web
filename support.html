@@ -1,191 +1,118 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
     <title>movieloz</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="لأحدث الأفلام والمسلسلات">
-
-
+<link rel="icon" href="20231208_045858_٠٠٠٠.png" type="image/x-icon">
 
     <style>
 
-        /* الأسلوب العام للصفحة */
-
-        body {
-
-            font-family: 'Tajawal', Arial, sans-serif;
-
-            background-image: url('background.jpg'); /* رابط الصورة الخلفية */
-
-            background-size: cover; /* لتغطية الشاشة بالكامل */
-
-            background-repeat: no-repeat; /* لعدم تكرار الصورة */
-
-            background-attachment: fixed; /* تجعل الصورة ثابتة عند التمرير */
-
-            margin: 0;
-
+        .movie-list {
+            list-style-type: none;
             padding: 0;
-
+            text-align: center; /* توسيط العناصر */
         }
 
-    
-
-        /* ترويسة الموقع */
-
-        header {
-
-            background-color: #333;
-
-            color: hsl(0, 94%, 46%);
-
-            text-align: center;
-
-            padding: 10px;
-
+        .movie-item {
+            margin: 10px;
         }
-
-
-
-        /* عنوان الصفحة */
-
-        h1 {
-
-            margin: 0;
-
-        }
-
-
-
-
-
-
-
-
-        /* توسيط عنوان الأفلام والمسلسلات والانمي */
-
-        h2 {
-
-            text-align: center;
-
-        }
-
-
-
-        /* مربع البحث */
-
-        .search-box {
-
-            text-align: center;
-
-            margin-top: 20px;
-
-        }
-
-
-
-        input[type="text"] {
-
-            padding: 10px;
-
-            border-radius: 5px;
-
-            border: 1px solid #ccc;
-
-            width: 100%; /* يمتلئ عرض الشاشة بالكامل */
-
-            max-width: 300px; /* حد أقصى لعرض المربع */
-
-        }
-
-
-
-        input[type="submit"] {
-
-            background-color: #333;
-
-            color: #fff;
-
-            padding: 10px 20px;
-
-            border: none;
-
-            border-radius: 5px;
-
-            cursor: pointer;
-
-        }
-
-
-
-        /* تعديل للشاشات الصغيرة (تقنية التجاوب) */
-
-        @media (max-width: 600px) {
-
-            h2 {
-
-                font-size: 24px; /* تصغير حجم العنوان للهواتف الصغيرة */
-
-            }
-
-            .search-box {
-
-                margin-top: 10px;
-
-            }
-
-        }
-
-    </style>
-
-    <!-- تضمين الخط العربي Tajawal -->
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400&display=swap">
-
-</head>
-
-<body>
-
-    <header>
-
-        <h1>movieloz</h1>
-
-    </header>
-
-    <div class="content">
-
-        <h2>أعلانات الموقع<br>(لتغطية تكاليف الاستضافة فقط)</h2>
-<h2>أعلانات الموقع<br>(لتغطية تكاليف الاستضافة فقط)</h2>
-
-<div style="background-color: red; padding: 10px;">
-    الصفحة الرئيسية
-</div>
-
-        <!-- مربع البحث -->
-<a href="https://moneycase.io/join/scx396b">
-  <img src="https://www.moneycase.io/static/banner/ar/1/728_90" style="width:100%;height:auto;max-width:720px;" alt="MoneyCase - Make money by sharing videos." />
-</a>
-
-
-<a href="https://moneycase.io/join/scx396b">
-  <img src="https://www.moneycase.io/static/banner/ar/4/728_90" style="width:100%;height:auto;max-width:720px;" alt="MoneyCase - Make money by sharing videos." />
-</a>
 
  
-        </ul>
+.red-box {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: red;
+    transition: background-color 0.3s;
+    font-size: 25px;
+}
 
+.red-box:hover {
+    background-color: gold;
+}
+
+
+
+
+
+
+
+
+
+
+        body {
+            font-family: 'Tajawal', Arial, sans-serif;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: hsl(0, 94%, 46%);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .faq-box {
+            border: 2px solid #333333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 600px;
+            background-color: #fff;
+        }
+    </style>
+    <!-- Link to the Arabic font Tajawal -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400&display=swap">
+</head>
+<body>
+    <header>
+        <h1>movieloz</h1>
+    </header>
+    <div class="content">
+        <h2>أخر الأخبار</h2>
+<h3>ينزل في موقعنا اكثر من ما يعرض هنا<br>هنا فقط أهم المسلسلات و الافلام التي تنزل بموقعنا</h3>
+        <div class="faq-box">
+
+
+
+
+
+
+    <!-- Add more question and answer pairs if needed -->
+</div>
+<div>
+        <ul class="movie-list">
+
+            <!-- إضافة العناصر هنا -->
+
+<li class="movie-item"><a href="/" class="red-box">الصفحة الرئيسية</a></li>
+
+
+</ul>
+</div>
+
+<div>
+
+
+
+
+
+</div>
+            <!-- Your FAQ content goes here -->
+        </div>
     </div>
 
-<script src="scripit.js"></script>
-
 </body>
-
-</head>
-
 </html>
-
