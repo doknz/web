@@ -49,6 +49,7 @@
         iframe { 
             width: 100%; 
             height: 400px; 
+            transition: height 0.5s; /* تأثير انتقالي لتغيير حجم الفيديو */
         } 
         ul { 
             list-style-type: none; 
@@ -93,18 +94,21 @@
                 <option value="https://server.sanime.net/Video/11482/1.mp4">الحلقة 1</option>
                 <option value="https://server.sanime.net/Video/11482/2.mp4">الحلقة 2</option>
                 <option value="https://server.sanime.net/Video/11482/3.mp4">الحلقة 3</option>
-                <!-- Add more options for each episode with their respective URLs -->
-            </select>
-        </div>
+                
+                    <a href="../../Movies" onclick="goBack()">رجوع</a> <!-- إضافة دالة جافا سكريبت للعودة للصفحة السابقة -->
+</div> 
 
-        <a href="../../Movies">رجوع</a> 
-    </div> 
+<script>
+    function changeEpisode(videoUrl) {
+        var videoPlayer = document.getElementById("videoPlayer");
+        videoPlayer.src = videoUrl;
+        videoPlayer.style.height = "100vh"; // تعيين ارتفاع الفريم ليغطي الشاشة بالكامل
+    }
 
-    <script>
-        function changeEpisode(videoUrl) {
-            var videoPlayer = document.getElementById("videoPlayer");
-            videoPlayer.src = videoUrl;
-        }
-    </script>
+    function goBack() {
+        window.history.back(); // دالة للعودة للصفحة السابقة
+    }
+</script>
 </body> 
 </html>
+```
