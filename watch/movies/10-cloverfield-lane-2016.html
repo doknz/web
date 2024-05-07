@@ -90,7 +90,7 @@
 
         <div class="episode-box">
             <select id="episodes" onchange="changeEpisode(this.value)">
-                <option value="https://server.sanime.net/Video/11482/1.mp4">الحلقة 1</option>
+                <option value="https://server.sanime.net/Video/11482/1.mp4" selected>الحلقة 1</option>
                 <option value="https://server.sanime.net/Video/11482/2.mp4">الحلقة 2</option>
                 <option value="https://server.sanime.net/Video/11482/3.mp4">الحلقة 3</option>
                 <!-- Add more options for each episode with their respective URLs -->
@@ -101,13 +101,4 @@
     </div> 
 
     <script>
-        // تعيين الحلقة الأولى كقيمة افتراضية للفيديو عند فتح الصفحة
-        document.getElementById("videoPlayer").src = "https://server.sanime.net/Video/11482/1.mp4";
-
-        function changeEpisode(videoUrl) {
-            var videoPlayer = document.getElementById("videoPlayer");
-            videoPlayer.src = videoUrl;
-        }
-    </script>
-</body> 
-</html>
+        //
