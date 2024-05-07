@@ -30,22 +30,13 @@
             font-size: 18px; 
         } 
 
-        .episode-box, .back-button {
-            width: 100%; /* تحديد عرض مربع الحلقات */
-            margin-top: 20px; /* تباعد أعلى مربع الحلقات */
-            background-color: red; /* لون خلفية مربع الحلقات */
-            padding: 20px; /* تباعد داخلي لمربع الحلقات */
-            border-radius: 5px; /* تدوير حواف مربع الحلقات */
+        .episode-box {
+            width: 70%; /* تحديد عرض مربع الحلقات */
+            margin: 20px auto; /* توسيط مربع الحلقات */
+            background-color: #f9f9f9; /* لون خلفية مربع الحلقات */
+            padding: 10px; /* تباعد داخلي لمربع الحلقات */
+            border-radius: 10px; /* تدوير حواف مربع الحلقات */
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* ظل لمربع الحلقات */
-            display: inline-block; /* جعل مربع الحلقات يظهر بجوار الفيديو */
-            color: #fff; /* لون النص داخل مربع الحلقات */
-            text-decoration: none; /* إزالة تأثيرات النص */
-            text-align: center; /* توسيط النص */
-            transition: background-color 0.3s; /* تأثير تغيير اللون عند التحويل */
-        }
-
-        .episode-box:hover, .back-button:hover {
-            background-color: #ffcc00; /* لون خلفية مربع الحلقات عند التحويل */
         }
 
         h1 { 
@@ -67,6 +58,9 @@
         li { 
             margin: 10px 0; 
             text-align: center; /* توسيط النص */ 
+        } 
+        a:hover { 
+            background-color: gold; 
         } 
         a { 
             text-decoration: none; 
@@ -94,8 +88,6 @@
 <br>[ Arabic ] و اختار كلمة 
 <br>إذا كانت هناك أخطاء في الترجمة أو تأخير أو تسريع، أو السيرفر لا يعمل، أرجوك أنسخ الرابط وأرسله إلينا بسرعة لتغييره ، من خلال الذهاب إلى صفحة اتصل بنا</h3>
 
-        <a href="../../Movies" class="back-button">رجوع</a> 
-
         <div class="episode-box">
             <select id="episodes" onchange="changeEpisode(this.value)">
                 <option value="https://vidsrc.me/embed/movie?imdb=tt1179933">الحلقة 1</option>
@@ -104,6 +96,8 @@
                 <!-- Add more options for each episode with their respective URLs -->
             </select>
         </div>
+
+        <a href="../../Movies">رجوع</a> 
     </div> 
 
     <script>
