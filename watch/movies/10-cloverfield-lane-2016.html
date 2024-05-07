@@ -29,7 +29,16 @@
             text-align: center; /* توسيط النص */ 
             font-size: 18px; 
         } 
- 
+
+        .episode-box {
+            width: 70%; /* تحديد عرض مربع الحلقات */
+            margin: 20px auto; /* توسيط مربع الحلقات */
+            background-color: #f9f9f9; /* لون خلفية مربع الحلقات */
+            padding: 10px; /* تباعد داخلي لمربع الحلقات */
+            border-radius: 10px; /* تدوير حواف مربع الحلقات */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* ظل لمربع الحلقات */
+        }
+
         h1 { 
             color: #ff0000; 
         } 
@@ -79,12 +88,14 @@
 <br>[ Arabic ] و اختار كلمة 
 <br>إذا كانت هناك أخطاء في الترجمة أو تأخير أو تسريع، أو السيرفر لا يعمل، أرجوك أنسخ الرابط وأرسله إلينا بسرعة لتغييره ، من خلال الذهاب إلى صفحة اتصل بنا</h3>
 
-        <select id="episodes" onchange="changeEpisode(this.value)">
-            <option value="https://vidsrc.me/embed/movie?imdb=tt1179933">الحلقة 1</option>
-            <option value="https://server.sanime.net/Video/11444/13.mp4">الحلقة 2</option>
-            <option value="https://vidsrc.me/embed/movie?imdb=tt1179935">الحلقة 3</option>
-            <!-- Add more options for each episode with their respective URLs -->
-        </select>
+        <div class="episode-box">
+            <select id="episodes" onchange="changeEpisode(this.value)">
+                <option value="https://vidsrc.me/embed/movie?imdb=tt1179933">الحلقة 1</option>
+                <option value="https://vidsrc.me/embed/movie?imdb=tt1179934">الحلقة 2</option>
+                <option value="https://vidsrc.me/embed/movie?imdb=tt1179935">الحلقة 3</option>
+                <!-- Add more options for each episode with their respective URLs -->
+            </select>
+        </div>
 
         <a href="../../Movies">رجوع</a> 
     </div> 
