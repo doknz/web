@@ -1,110 +1,134 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-    <title>movieloz</title> 
-    <meta charset="UTF-8"> 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>movieloz</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="لأحدث الافلام و المسلسلات"> 
-    <style> 
-        body { 
-            font-family: Arial, sans-serif; 
-            background-color: #f0f0f0; 
-            margin: 0; 
-            padding: 0; 
-        } 
- 
-        header { 
-            background-color: #333; 
-            color: hsl(0, 94%, 46%); 
-            text-align: center; 
-            padding: 10px; 
-        } 
- 
-        .container { 
-            max-width: 800px; 
-            margin: 20px auto; 
-            padding: 20px; /* تم تقليل التباعد الداخلي للمحتوى */ 
-            background-color: #fff; 
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-            text-align: center; /* توسيط النص */ 
-            font-size: 18px; 
-        } 
-
-        .episode-box {
-            width: 70%; /* تحديد عرض مربع الحلقات */
-            margin: 20px auto; /* توسيط مربع الحلقات */
-            background-color: #f9f9f9; /* لون خلفية مربع الحلقات */
-            padding: 10px; /* تباعد داخلي لمربع الحلقات */
-            border-radius: 10px; /* تدوير حواف مربع الحلقات */
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* ظل لمربع الحلقات */
+    <meta name="description" content="لأحدث الافلام و المسلسلات">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
         }
 
-        h1 { 
-            color: #ff0000; 
-        } 
-        h4{ 
-            size: 100%; ; 
-        } 
- 
-        iframe { 
-            width: 100%; 
-            height: 400px; 
-        } 
-        ul { 
-            list-style-type: none; 
-            padding: 0; 
-        } 
- 
-        li { 
-            margin: 10px 0; 
-            text-align: center; /* توسيط النص */ 
-        } 
-        a:hover { 
-            background-color: gold; 
-        } 
-        a { 
-            text-decoration: none; 
-            color: #333; 
-            display: block; 
-            padding: 20px; 
-            border-radius: 5px; 
-            background-color: red; 
-            transition: background-color 0.3s; /* تغيير لون الخلفية عند التحويل */ 
-        } 
- 
-        p { 
-            text-align: justify; 
-        } 
-    </style> 
-</head> 
-<body> 
-    <header> 
-        <h1>movieloz</h1> 
-    </header> 
-    <div class="container"> 
-        <iframe id="videoPlayer" src="https://server.sanime.net/Video/11444/13.mp4" frameborder="0" allowfullscreen></iframe> 
-        <h2></h2> 
-        <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
-<br>[ Arabic ] و اختار كلمة 
-<br>إذا كانت هناك أخطاء في الترجمة أو تأخير أو تسريع، أو السيرفر لا يعمل، أرجوك أنسخ الرابط وأرسله إلينا بسرعة لتغييره ، من خلال الذهاب إلى صفحة اتصل بنا</h3>
+        header {
+            background-color: #333;
+            color: hsl(0, 94%, 46%);
+            text-align: center;
+            padding: 10px;
+        }
 
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .episode-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .episode-box {
+            width: 45%;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            width: 45%;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ff0000;
+        }
+
+        h4 {
+            size: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        a:hover {
+            background-color: gold;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: red;
+            transition: background-color 0.3s;
+        }
+
+        p {
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>movieloz</h1>
+</header>
+<div class="container">
+    <div class="episode-container">
         <div class="episode-box">
             <select id="episodes" onchange="changeEpisode(this.value)">
-                <option value="https://server.sanime.net/Video/11444/13.mp4">الحلقة 1</option>
+                <option value="https://vidsrc.me/embed/movie?imdb=tt1179933">الحلقة 1</option>
                 <option value="https://vidsrc.me/embed/movie?imdb=tt1179934">الحلقة 2</option>
                 <option value="https://vidsrc.me/embed/movie?imdb=tt1179935">الحلقة 3</option>
                 <!-- Add more options for each episode with their respective URLs -->
             </select>
         </div>
+        <div class="search-box">
+            <input type="text" placeholder="ابحث عن الحلقة">
+            <button>ابحث</button>
+        </div>
+    </div>
 
-        <a href="../../Movies">رجوع</a> 
-    </div> 
+    <iframe id="videoPlayer" src="https://vidsrc.me/embed/movie?imdb=tt1179933" frameborder="0" allowfullscreen></iframe>
+    <h2></h2>
+    <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
+<br>[ Arabic ] و اختار كلمة 
+<br>إذا كانت هناك أخطاء في الترجمة أو تأخير أو تسريع، أو السيرفر لا يعمل، أرجوك أنسخ الرابط وأرسله إلينا بسرعة لتغييره ، من خلال الذهاب إلى صفحة اتصل بنا</h3>
 
-    <script>
-        function changeEpisode(videoUrl) {
-            var videoPlayer = document.getElementById("videoPlayer");
-            videoPlayer.src = videoUrl;
-        }
-    </script>
-</body> 
+    <a href="../../Movies">رجوع</a>
+</div>
+
+<script>
+    function changeEpisode(videoUrl) {
+        var videoPlayer = document.getElementById("videoPlayer");
+        videoPlayer.src = videoUrl;
+    }
+</script>
+</body>
 </html>
