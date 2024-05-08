@@ -5,6 +5,7 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="لأحدث الافلام و المسلسلات"> 
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">
     <style> 
         body { 
             font-family: Arial, sans-serif; 
@@ -47,8 +48,7 @@
         } 
  
         iframe { 
-            width: 100%; 
-            height: 400px; 
+            display: none;
         } 
         ul { 
             list-style-type: none; 
@@ -82,7 +82,9 @@
         <h1>movieloz</h1> 
     </header> 
     <div class="container"> 
-        <iframe id="videoPlayer" src="https://vidsrc.me/embed/movie?imdb=tt1179933" frameborder="0" allowfullscreen></iframe> 
+        <video id="player" controls crossorigin>
+            <source src="https://vidsrc.me/embed/movie?imdb=tt1179933" type="video/mp4">
+        </video>
         <h2></h2> 
         <h3>اذا لم تعمل الحلقة أنسخ الرابط و ارسله لنا من خلال الذهاب الى صفحة اتصل بنا</h3>
 
@@ -98,10 +100,20 @@
         <a href="../../Movies">رجوع</a> 
     </div> 
 
+    <script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
     <script>
+        const player = new Plyr('#player');
+        
         function changeEpisode(videoUrl) {
-            var videoPlayer = document.getElementById("videoPlayer");
-            videoPlayer.src = videoUrl;
+            player.source = {
+                type: 'video',
+                sources: [
+                    {
+                        src: videoUrl,
+                        type: 'video/mp4',
+                    },
+                ],
+            };
         }
     </script>
 </body> 
