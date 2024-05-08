@@ -5,7 +5,6 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="لأحدث الافلام و المسلسلات"> 
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">
     <style> 
         body { 
             font-family: Arial, sans-serif; 
@@ -82,16 +81,15 @@
         <h1>movieloz</h1> 
     </header> 
     <div class="container"> 
-        <video id="player" controls crossorigin>
+        <video id="videoPlayer" controls>
             <source src="https://server.sanime.net/Video2/532/1.mp4" type="video/mp4">
         </video>
         <h2></h2> 
-        <h3>اذا لم تعمل الحلقة أنسخ الرابط و ارسله لنا من خلال الذهاب الى صفحة اتصل بنا</h3>
+        <h3>إذا لم تعمل الحلقة، يرجى نسخ الرابط وإرساله لنا من خلال زيارة صفحة "اتصل بنا"</h3>
 
         <div class="episode-box">
             <select id="episodes" onchange="changeEpisode(this.value)">
                 <option value="https://server.sanime.net/Video2/532/1.mp4">الحلقة 1</option>
-            
                 <!-- Add more options for each episode with their respective URLs -->
             </select>
         </div>
@@ -99,20 +97,10 @@
         <a href="../../Movies">رجوع</a> 
     </div> 
 
-    <script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
     <script>
-        const player = new Plyr('#player');
-        
         function changeEpisode(videoUrl) {
-            player.source = {
-                type: 'video',
-                sources: [
-                    {
-                        src: videoUrl,
-                        type: 'video/mp4',
-                    },
-                ],
-            };
+            var videoPlayer = document.getElementById("videoPlayer");
+            videoPlayer.src = videoUrl;
         }
     </script>
 </body> 
