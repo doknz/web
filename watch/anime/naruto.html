@@ -1,0 +1,201 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>movieloz</title> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="لأحدث الافلام و المسلسلات"> 
+    <style> 
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f0f0f0; 
+            margin: 0; 
+            padding: 0; 
+        } 
+ 
+        header { 
+            background-color: #333; 
+            color: hsl(0, 94%, 46%); 
+            text-align: center; 
+            padding: 10px; 
+        } 
+ 
+        .container { 
+            max-width: 800px; 
+            margin: 20px auto; 
+            padding: 20px; /* تم تقليل التباعد الداخلي للمحتوى */ 
+            background-color: #fff; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            text-align: center; /* توسيط النص */ 
+            font-size: 18px; 
+        } 
+
+        .episode-box {
+            width: 70%; /* تحديد عرض مربع الحلقات */
+            margin: 20px auto; /* توسيط مربع الحلقات */
+            background-color: #f9f9f9; /* لون خلفية مربع الحلقات */
+            padding: 10px; /* تباعد داخلي لمربع الحلقات */
+            border-radius: 10px; /* تدوير حواف مربع الحلقات */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* ظل لمربع الحلقات */
+        }
+
+        h1 { 
+            color: #ff0000; 
+        } 
+        h4{ 
+            size: 100%; ; 
+        } 
+ 
+        iframe { 
+            display: none;
+        } 
+        ul { 
+            list-style-type: none; 
+            padding: 0; 
+        } 
+ 
+        li { 
+            margin: 10px 0; 
+            text-align: center; /* توسيط النص */ 
+        } 
+        a:hover { 
+            background-color: gold; 
+        } 
+        a { 
+            text-decoration: none; 
+            color: #333; 
+            display: block; 
+            padding: 20px; 
+            border-radius: 5px; 
+            background-color: red; 
+            transition: background-color 0.3s; /* تغيير لون الخلفية عند التحويل */ 
+        } 
+ 
+        p { 
+            text-align: justify; 
+        } 
+        video {
+            width: 100%;
+            height: auto;
+        }
+    </style> 
+</head> 
+<body> 
+    <header> 
+        <h1>movieloz</h1> 
+    </header> 
+    <div class="container"> 
+        <video id="videoPlayer" controls>
+            <source src="https://server.sanime.net/Video3/529/1.mp4" type="video/mp4">
+        </video>
+        <h2></h2> 
+        <h3>إذا لم تعمل الحلقة، يرجى نسخ الرابط وإرساله لنا من خلال زيارة صفحة "اتصل بنا"</h3>
+
+        <div class="episode-box">
+            <select id="episodes" onchange="changeEpisode(this.value)">
+                <option value="https://server.sanime.net/Video3/529/1.mp4">الحلقة 1</option>
+                <option value="https://server.sanime.net/Video3/529/2.mp4">الحلقة 2</option>
+                <option value="https://server.sanime.net/Video3/529/3.mp4">الحلقة 3</option>
+                <option value="https://server.sanime.net/Video3/529/4.mp4">الحلقة 4</option>
+                <option value="https://server.sanime.net/Video3/529/5.mp4">الحلقة 5</option>
+                <option value="https://server.sanime.net/Video3/529/6.mp4">الحلقة 6</option>
+                <option value="https://server.sanime.net/Video3/529/7.mp4">الحلقة 7</option>
+                <option value="https://server.sanime.net/Video3/529/8.mp4">الحلقة 8</option>
+                <option value="https://server.sanime.net/Video3/529/9.mp4">الحلقة 9</option>
+                <option value="https://server.sanime.net/Video3/529/10.mp4">الحلقة 10</option>
+                <option value="https://server.sanime.net/Video3/529/11.mp4">الحلقة 11</option>
+                <option value="https://server.sanime.net/Video3/529/12.mp4">الحلقة 12</option>
+                <option value="https://server.sanime.net/Video3/529/13.mp4">الحلقة 13</option>
+                <option value="https://server.sanime.net/Video3/529/14.mp4">الحلقة 14</option>
+                <option value="https://server.sanime.net/Video3/529/15.mp4">الحلقة 15</option>
+                <option value="https://server.sanime.net/Video3/529/16.mp4">الحلقة 16</option>
+                <option value="https://server.sanime.net/Video3/529/17.mp4">الحلقة 17</option>
+                <option value="https://server.sanime.net/Video3/529/18.mp4">الحلقة 18</option>
+                <option value="https://server.sanime.net/Video3/529/19.mp4">الحلقة 19</option>
+                <option value="https://server.sanime.net/Video3/529/20.mp4">الحلقة 20</option>
+                <option value="https://server.sanime.net/Video3/529/21.mp4">الحلقة 21</option>
+                <option value="https://server.sanime.net/Video3/529/22.mp4">الحلقة 22</option>
+                <option value="https://server.sanime.net/Video3/529/23.mp4">الحلقة 23</option>
+                <option value="https://server.sanime.net/Video3/529/24.mp4">الحلقة 24</option>
+                <option value="https://server.sanime.net/Video3/529/25.mp4">الحلقة 25</option>
+                <option value="https://server.sanime.net/Video3/529/26.mp4">الحلقة 26</option>
+                <option value="https://server.sanime.net/Video3/529/27.mp4">الحلقة 27</option>
+                <option value="https://server.sanime.net/Video3/529/28.mp4">الحلقة 28</option>
+                <option value="https://server.sanime.net/Video3/529/29.mp4">الحلقة 29</option>
+                <option value="https://server.sanime.net/Video3/529/30.mp4">الحلقة 30</option>
+                <option value="https://server.sanime.net/Video3/529/31.mp4">الحلقة 31</option>
+                <option value="https://server.sanime.net/Video3/529/32.mp4">الحلقة 32</option>
+                <option value="https://server.sanime.net/Video3/529/33.mp4">الحلقة 33</option>
+                <option value="https://server.sanime.net/Video3/529/34.mp4">الحلقة 34</option>
+                <option value="https://server.sanime.net/Video3/529/35.mp4">الحلقة 35</option>
+                <option value="https://server.sanime.net/Video3/529/36.mp4">الحلقة 36</option>
+                <option value="https://server.sanime.net/Video3/529/37.mp4">الحلقة 37</option>
+                <option value="https://server.sanime.net/Video3/529/38.mp4">الحلقة 38</option>
+                <option value="https://server.sanime.net/Video3/529/39.mp4">الحلقة 39</option>
+                <option value="https://server.sanime.net/Video3/529/40.mp4">الحلقة 40</option>
+                <option value="https://server.sanime.net/Video3/529/41.mp4">الحلقة 41</option>
+                <option value="https://server.sanime.net/Video3/529/42.mp4">الحلقة 42</option>
+                <option value="https://server.sanime.net/Video3/529/43.mp4">الحلقة 43</option>
+                <option value="https://server.sanime.net/Video3/529/44.mp4">الحلقة 44</option>
+                <option value="https://server.sanime.net/Video3/529/45.mp4">الحلقة 45</option>
+                <option value="https://server.sanime.net/Video3/529/46.mp4">الحلقة 46</option>
+                <option value="https://server.sanime.net/Video3/529/47.mp4">الحلقة 47</option>
+                <option value="https://server.sanime.net/Video3/529/48.mp4">الحلقة 48</option>
+                <option value="https://server.sanime.net/Video3/529/49.mp4">الحلقة 49</option>
+                <option value="https://server.sanime.net/Video3/529/50.mp4">الحلقة 50</option>
+                <option value="https://server.sanime.net/Video3/529/51.mp4">الحلقة 51</option>
+                <option value="https://server.sanime.net/Video3/529/52.mp4">الحلقة 52</option>
+                <option value="https://server.sanime.net/Video3/529/53.mp4">الحلقة 53</option>
+                <option value="https://server.sanime.net/Video3/529/54.mp4">الحلقة 54</option>
+                <option value="https://server.sanime.net/Video3/529/55.mp4">الحلقة 55</option>
+                <option value="https://server.sanime.net/Video3/529/56.mp4">الحلقة 56</option>
+                <option value="https://server.sanime.net/Video3/529/57.mp4">الحلقة 57</option>
+                <option value="https://server.sanime.net/Video3/529/58.mp4">الحلقة 58</option>
+                <option value="https://server.sanime.net/Video3/529/59.mp4">الحلقة 59</option>
+                <option value="https://server.sanime.net/Video3/529/60.mp4">الحلقة 60</option>
+                <option value="https://server.sanime.net/Video3/529/61.mp4">الحلقة 61</option>
+                <option value="https://server.sanime.net/Video3/529/62.mp4">الحلقة 62</option>
+                <option value="https://server.sanime.net/Video3/529/63.mp4">الحلقة 63</option>
+                <option value="https://server.sanime.net/Video3/529/64.mp4">الحلقة 64</option>
+                <option value="https://server.sanime.net/Video3/529/65.mp4">الحلقة 65</option>
+                <option value="https://server.sanime.net/Video3/529/66.mp4">الحلقة 66</option>
+                <option value="https://server.sanime.net/Video3/529/67.mp4">الحلقة 67</option>
+                <option value="https://server.sanime.net/Video3/529/68.mp4">الحلقة 68</option>
+                <option value="https://server.sanime.net/Video3/529/69.mp4">الحلقة 69</option>
+                <option value="https://server.sanime.net/Video3/529/70.mp4">الحلقة 70</option>
+                <option value="https://server.sanime.net/Video3/529/71.mp4">الحلقة 71</option>
+                <option value="https://server.sanime.net/Video3/529/72.mp4">الحلقة 72</option>
+                <option value="https://server.sanime.net/Video3/529/73.mp4">الحلقة 73</option>
+                <option value="https://server.sanime.net/Video3/529/74.mp4">الحلقة 74</option>
+                <option value="https://server.sanime.net/Video3/529/75.mp4">الحلقة 75</option>
+                <option value="https://server.sanime.net/Video3/529/76.mp4">الحلقة 76</option>
+                <option value="https://server.sanime.net/Video3/529/77.mp4">الحلقة 77</option>
+                <option value="https://server.sanime.net/Video3/529/78.mp4">الحلقة 78</option>
+                <option value="https://server.sanime.net/Video3/529/79.mp4">الحلقة 79</option>
+                <option value="https://server.sanime.net/Video3/529/80.mp4">الحلقة 80</option>
+                <option value="https://server.sanime.net/Video3/529/81.mp4">الحلقة 81</option>
+                <option value="https://server.sanime.net/Video3/529/82.mp4">الحلقة 82</option>
+                <option value="https://server.sanime.net/Video3/529/83.mp4">الحلقة 83</option>
+                <option value="https://server.sanime.net/Video3/529/84.mp4">الحلقة 84</option>
+                <option value="https://server.sanime.net/Video3/529/85.mp4">الحلقة 85</option>
+                <option value="https://server.sanime.net/Video3/529/86.mp4">الحلقة 86</option>
+                <option value="https://server.sanime.net/Video3/529/87.mp4">الحلقة 87</option>
+                <option value="https://server.sanime.net/Video3/529/88.mp4">الحلقة 88</option>
+                <option value="https://server.sanime.net/Video3/529/89.mp4">الحلقة 89</option>
+                <option value="https://server.sanime.net/Video3/529/90.mp4">الحلقة 90</option>
+                <option value="https://server.sanime.net/Video3/529/91.mp4">الحلقة 91</option>
+                <!-- Add more options for each episode with their respective URLs -->
+            </select>
+        </div>
+
+        <a href="../../Anime">رجوع</a> 
+    </div> 
+
+    <script>
+        function changeEpisode(videoUrl) {
+            var videoPlayer = document.getElementById("videoPlayer");
+            videoPlayer.src = videoUrl;
+        }
+    </script>
+</body> 
+</html>
