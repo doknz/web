@@ -79,11 +79,7 @@
 </header>
 
 <div class="container">
-    <img id="moviePoster" src="" alt="Movie Poster">
-
-
-<div class="container">
-    <iframe src="https://vidsrc.me/embed/movie?imdb=tt1179933" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://vidsrc.me/embed/movie?imdb=tt0147800" frameborder="0" allowfullscreen></iframe>
     <h2></h2>
     <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
     <br>[ Arabic ] و اختار كلمة 
@@ -91,21 +87,34 @@
     <a href="../../Movies">رجوع</a> 
 </div> 
 
-
+<div class="container">
+    <img id="moviePoster" src="" alt="Movie Poster">
+    <div id="movieInfo"></div>
+    <a href="../../Movies">رجوع</a>
+</div>
 
 <script>
-    // Fetch movie poster using OMDB API
+    // Fetch movie details and poster using OMDB API
     const omdbApiKey = 'c360e39d';
-    const imdbId = 'tt1179933';
-    const posterUrl = `https://www.omdbapi.com/?i=${imdbId}&apikey=${omdbApiKey}`;
+    const imdbId = 'tt12637874';
+    const apiUrl = `https://www.omdbapi.com/?i=${imdbId}&apikey=${omdbApiKey}`;
 
-    fetch(posterUrl)
+    fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
             const posterUrl = data.Poster;
             document.getElementById('moviePoster').src = posterUrl;
+
+            const movieInfo = `
+                <h2>${data.Title}</h2>
+                <p><strong>النوع:</strong> ${data.Genre}</p>
+                <p><strong>التقييم:</strong> ${data.imdbRating}</p>
+                <p><strong>القصة:</strong> ${data.Plot}</p>
+                <p><strong>الممثلين:</strong> ${data.Actors}</p>
+            `;
+            document.getElementById('movieInfo').innerHTML = movieInfo;
         })
-        .catch(error => console.error('Error fetching poster:', error));
+        .catch(error => console.error('Error fetching movie details:', error));
 </script>
 </body>
 </html>
