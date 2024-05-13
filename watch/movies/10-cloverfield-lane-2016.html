@@ -28,10 +28,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center; /* توسيط النص */
             font-size: 18px;
-        }
-
-        h1 {
-            color: #ff0000;
+            border-radius: 10px; /* إضافة حواف مستديرة */
+            overflow: hidden; /* تجنب تسرب المحتوى خارج الحواف المستديرة */
         }
 
         iframe {
@@ -57,6 +55,28 @@
             text-align: justify;
             margin-bottom: 10px;
         }
+
+        .movie-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .movie-poster {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .movie-info {
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .movie-info p {
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -74,15 +94,15 @@
 </div> 
 
 <div class="container">
-    <img id="moviePoster" src="" alt="Movie Poster">
-    <div id="movieInfo"></div>
+    <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
+    <div id="movieInfo" class="movie-info"></div>
     <a href="../../Movies">رجوع</a>
 </div>
 
 <script>
     // Fetch movie details and poster using TMDB API
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const tmdbMovieId = '967847'; // Example movie ID (Arabic movie "خط الموت")
+    const tmdbMovieId = '724989'; // Example movie ID (Arabic movie "خط الموت")
     const apiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=ar`;
 
     fetch(apiUrl)
