@@ -84,18 +84,32 @@
             font-size: 24px;
             margin-bottom: 10px;
         }
+
+        .trailer-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio */
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .trailer-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
     </style>
 </head>
 <body>
 <header>
     <h1>movieloz</h1>
 </header>
+
 <div class="container">
-    <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
-    <div id="movieInfo" class="movie-info"></div>
-    
-<div class="container">
-    <iframe src="https://vidsrc.me/embed/movie?imdb=tt1179933" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://vidsrc.me/embed/movie?imdb=tt0147800" frameborder="0" allowfullscreen></iframe>
     <h2></h2>
     <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
     <br>[ Arabic ] و اختار كلمة 
@@ -103,38 +117,63 @@
     <a href="../../Movies">رجوع</a> 
 </div> 
 
+<div class="container">
+    <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
+    <div id="movieInfo" class="movie-info"></div>
+    <div class="trailer-container" id="trailerContainer"></div>
+    <a href="../../Movies">رجوع</a>
+</div>
 
 <script>
     // Fetch movie details and poster using TMDB API
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const imdbMovieId = 'tt1179933'; // Example IMDb movie ID (Arabic movie "خط الموت")
+    const imdbMovieId = 'tt0147800'; // Example IMDb movie ID (Arabic movie "خط الموت")
     const apiUrl = `https://api.themoviedb.org/3/find/${imdbMovieId}?api_key=${tmdbApiKey}&language=ar&external_source=imdb_id`;
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
             const tmdbMovieId = data.movie_results[0].id;
-            const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
-            
+            const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=ar`;
+
             fetch(tmdbApiUrl)
                 .then(response => response.json())
                 .then(data => {
                     const posterUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
                     document.getElementById('moviePoster').src = posterUrl;
-        
+
+                    const movieTitle = `<h2 class="movie-title">${data.title}</h2>`;
                     const movieInfo = `
-                        <h2 class="movie-title">${data.title}</h2>
                         <div class="movie-details">
-                            <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                            <p><strong>Rate:</strong> ${data.vote_average}</p>
-                            <p><strong>Story:</strong> ${data.overview}</p>
+                            <div class="movie-info">
+                                <p><strong>النوع:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                                <p><strong>التقييم:</strong> ${data.vote_average}</p>
+                                <p><strong>القصة:</strong> ${data.overview}</p>
+                            </div>
                         </div>
                     `;
-                    document.getElementById('movieInfo').innerHTML = movieInfo;
+                    document.getElementById('movieInfo').innerHTML = movieTitle + movieInfo;
+
+                    // Fetch trailer from TMDB
+                    const tmdbTrailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=ar`;
+                    fetch(tmdbTrailerUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            const trailers = data.results.filter(result => result.type === 'Trailer');
+                            if (trailers.length > 0) {
+                                const trailerKey = trailers[0].key;
+                                const trailerUrl = `https://www.youtube.com/embed/${trailerKey}`;
+                                const iframe = document.createElement('iframe');
+                                iframe.src = trailerUrl;
+                                iframe.allowFullscreen = true;
+                                document.getElementById('trailerContainer').appendChild(iframe);
+                            }
+                        })
+                        .catch(error => console.error('Error fetching trailer:', error));
                 })
                 .catch(error => console.error('Error fetching movie details:', error));
         })
-        .catch(error => console.error('Error fetching movie ID from IMDb:', error));
+        .catch(error => console.error('Error fetching TMDB movie ID:', error));
 </script>
 </body>
 </html>
