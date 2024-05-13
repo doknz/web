@@ -108,7 +108,7 @@
     // Fetch movie details and poster using TMDB API
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
     const tmdbMovieId = '724989'; // Example movie ID (Arabic movie "خط الموت")
-    const apiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=ar`;
+    const apiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
 
     fetch(apiUrl)
         .then(response => response.json())
@@ -119,9 +119,9 @@
             const movieInfo = `
                 <h2 class="movie-title">${data.title}</h2>
                 <div class="movie-details">
-                    <p><strong>النوع:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                    <p><strong>التقييم:</strong> ${data.vote_average}</p>
-                    <p><strong>القصة:</strong> ${data.overview}</p>
+                    <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                    <p><strong>Rate:</strong> ${data.vote_average}</p>
+                    <p><strong>Story:</strong> ${data.overview}</p>
                 </div>
             `;
             document.getElementById('movieInfo').innerHTML = movieInfo;
