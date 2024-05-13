@@ -34,28 +34,9 @@
             color: #ff0000;
         }
 
-        h4 {
-            size: 100%;
-            ;
-        }
-
         iframe {
             width: 100%;
             height: 400px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin: 10px 0;
-            text-align: center; /* توسيط النص */
-        }
-
-        a:hover {
-            background-color: gold;
         }
 
         a {
@@ -68,8 +49,13 @@
             transition: background-color 0.3s; /* تغيير لون الخلفية عند التحويل */
         }
 
+        a:hover {
+            background-color: gold;
+        }
+
         p {
             text-align: justify;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -94,23 +80,22 @@
 </div>
 
 <script>
-    // Fetch movie details and poster using OMDB API
-    const omdbApiKey = 'c360e39d';
-    const imdbId = 'tt12637874';
-    const apiUrl = `https://www.omdbapi.com/?i=${imdbId}&apikey=${omdbApiKey}`;
+    // Fetch movie details and poster using TMDB API
+    const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
+    const tmdbMovieId = '724989'; // Example movie ID (Arabic movie "خط الموت")
+    const apiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=ar`;
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            const posterUrl = data.Poster;
+            const posterUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
             document.getElementById('moviePoster').src = posterUrl;
 
             const movieInfo = `
-                <h2>${data.Title}</h2>
-                <p><strong>النوع:</strong> ${data.Genre}</p>
-                <p><strong>التقييم:</strong> ${data.imdbRating}</p>
-                <p><strong>القصة:</strong> ${data.Plot}</p>
-                <p><strong>الممثلين:</strong> ${data.Actors}</p>
+                <h2>${data.title}</h2>
+                <p><strong>النوع:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                <p><strong>التقييم:</strong> ${data.vote_average}</p>
+                <p><strong>القصة:</strong> ${data.overview}</p>
             `;
             document.getElementById('movieInfo').innerHTML = movieInfo;
         })
