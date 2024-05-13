@@ -16,13 +16,11 @@
             .then(response => response.json())
             .then(data => {
                 const embedLinks = document.getElementById('embedLinks');
-                data.forEach(embedLink => {
-                    const iframe = document.createElement('iframe');
-                    iframe.src = embedLink.url;
-                    iframe.setAttribute('frameborder', '0');
-                    iframe.setAttribute('allowfullscreen', 'true');
-                    embedLinks.appendChild(iframe);
-                });
+                const iframe = document.createElement('iframe');
+                iframe.src = data.url;
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allowfullscreen', 'true');
+                embedLinks.appendChild(iframe);
             })
             .catch(error => console.error('Error fetching embed links:', error));
     </script>
