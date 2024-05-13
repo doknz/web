@@ -78,8 +78,24 @@
     <h1>movieloz</h1>
 </header>
 <div class="container">
-    <img src="https://m.media-amazon.com/images/M/MV5BOTM5ODMzNTktYzgwZS00YjI0LWFiY2MtMDM0NzU0MzRkZjRhXkEyXkFqcGdeQXVyMjMxOTE0ODA@._V1_SY1000_SX677_AL_.jpg" alt="Movie Poster">
+    <img id="moviePoster" src="" alt="Movie Poster">
     <a href="../../Movies">رجوع</a>
 </div>
+
+<script>
+    // Fetch movie poster using TMDb API
+    const tmdbApiKey = '967847';
+    const imdbId = 'tt12637874';
+    const posterUrl = `https://api.themoviedb.org/3/find/${imdbId}?api_key=${tmdbApiKey}&language=en-US&external_source=imdb_id`;
+
+    fetch(posterUrl)
+        .then(response => response.json())
+        .then(data => {
+            const posterPath = data.movie_results[0].poster_path;
+            const posterBaseUrl = 'https://image.tmdb.org/t/p/w500';
+            document.getElementById('moviePoster').src = posterBaseUrl + posterPath;
+        })
+        .catch(error => console.error('Error fetching poster:', error));
+</script>
 </body>
 </html>
