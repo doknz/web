@@ -145,11 +145,9 @@
                     const movieTitle = `<h2 class="movie-title">${data.title}</h2>`;
                     const movieInfo = `
                         <div class="movie-details">
-                            <div class="movie-info">
-                                <p><strong>النوع:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                                <p><strong>التقييم:</strong> ${data.vote_average}</p>
-                                <p><strong>القصة:</strong> ${data.overview}</p>
-                            </div>
+                            <p><strong>النوع:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                            <p><strong>التقييم:</strong> ${data.vote_average}</p>
+                            <p><strong>القصة:</strong> ${data.overview}</p>
                         </div>
                     `;
                     document.getElementById('movieInfo').innerHTML = movieTitle + movieInfo;
@@ -177,3 +175,6 @@
 </script>
 </body>
 </html>
+```
+
+يرجى التأكد من وجود مفتاح API الخاص بك والاستبدال به في الكود.
