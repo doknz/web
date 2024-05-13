@@ -78,6 +78,12 @@
         .movie-info p {
             margin-bottom: 10px;
         }
+
+        .movie-title {
+            color: #ff0000;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -113,10 +119,12 @@
             document.getElementById('moviePoster').src = posterUrl;
 
             const movieInfo = `
-                <h2>${data.title}</h2>
-                <p><strong>النوع:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                <p><strong>التقييم:</strong> ${data.vote_average}</p>
-                <p><strong>القصة:</strong> ${data.overview}</p>
+                <h2 class="movie-title">${data.title}</h2>
+                <div class="movie-details">
+                    <p><strong>النوع:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                    <p><strong>التقييم:</strong> ${data.vote_average}</p>
+                    <p><strong>القصة:</strong> ${data.overview}</p>
+                </div>
             `;
             document.getElementById('movieInfo').innerHTML = movieInfo;
         })
