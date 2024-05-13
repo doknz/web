@@ -1,45 +1,30 @@
-// Replace 'YOUR_TMDB_API_KEY' with your TMDB API key
-const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Embed</title>
+</head>
+<body>
+    <div id="embedLinks"></div>
 
-// Function to fetch movie embed URL from TMDB
-function fetchMovieEmbedUrl(tmdbId) {
-    const apiUrl = `https://vidsrc.xyz/embed/movie?tmdb=${tmdbId}&apikey=${tmdbApiKey}`;
-    return fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => data.url)
-        .catch(error => console.error('Error fetching movie embed URL:', error));
-}
+    <script>
+        const apiKey = 'cf64a661774f647b7513facb9f1e55e5';
+        const tmdbMovieId = '724989'; // Example movie ID (Arabic movie "خط الموت")
 
-// Function to fetch TV show embed URL from TMDB
-function fetchTvShowEmbedUrl(tmdbId) {
-    const apiUrl = `https://vidsrc.xyz/embed/tv?tmdb=${tmdbId}&apikey=${tmdbApiKey}`;
-    return fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => data.url)
-        .catch(error => console.error('Error fetching TV show embed URL:', error));
-}
-
-// Function to fetch episode embed URL from TMDB
-function fetchEpisodeEmbedUrl(tmdbId, season, episode) {
-    const apiUrl = `https://vidsrc.xyz/embed/tv?tmdb=${tmdbId}&season=${season}&episode=${episode}&apikey=${tmdbApiKey}`;
-    return fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => data.url)
-        .catch(error => console.error('Error fetching episode embed URL:', error));
-}
-
-// Example usage
-const tmdbMovieId = '385687'; // Example movie ID
-const tmdbTvShowId = '1399'; // Example TV show ID
-const tmdbEpisodeId = '1399'; // Example episode ID
-const seasonNumber = '1'; // Example season number
-const episodeNumber = '1'; // Example episode number
-
-fetchMovieEmbedUrl(tmdbMovieId)
-    .then(movieEmbedUrl => console.log('Movie Embed URL:', movieEmbedUrl));
-
-fetchTvShowEmbedUrl(tmdbTvShowId)
-    .then(tvShowEmbedUrl => console.log('TV Show Embed URL:', tvShowEmbedUrl));
-
-fetchEpisodeEmbedUrl(tmdbEpisodeId, seasonNumber, episodeNumber)
-    .then(episodeEmbedUrl => console.log('Episode Embed URL:', episodeEmbedUrl));
+        fetch(`https://vidsrc.xyz/embed/movie?tmdb=${tmdbMovieId}`)
+            .then(response => response.json())
+            .then(data => {
+                const embedLinks = document.getElementById('embedLinks');
+                data.forEach(embedLink => {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = embedLink.url;
+                    iframe.setAttribute('frameborder', '0');
+                    iframe.setAttribute('allowfullscreen', 'true');
+                    embedLinks.appendChild(iframe);
+                });
+            })
+            .catch(error => console.error('Error fetching embed links:', error));
+    </script>
+</body>
+</html>
