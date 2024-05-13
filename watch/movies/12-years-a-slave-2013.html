@@ -1,86 +1,151 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-    <title>movieloz</title> 
-    <meta charset="UTF-8"> 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>movieloz</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="لأحدث الافلام و المسلسلات"> 
-    <style> 
-        body { 
-            font-family: Arial, sans-serif; 
-            background-color: #f0f0f0; 
-            margin: 0; 
-            padding: 0; 
-        } 
- 
-        header { 
-            background-color: #333; 
-            color: hsl(0, 94%, 46%); 
-            text-align: center; 
-            padding: 10px; 
-        } 
- 
-        .container { 
-            max-width: 800px; 
-            margin: 20px auto; 
-            padding: 20px; /* تم تقليل التباعد الداخلي للمحتوى */ 
-            background-color: #fff; 
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
-            text-align: center; /* توسيط النص */ 
-            font-size: 18px; 
-        } 
- 
-        h1 { 
-            color: #ff0000; 
-        } 
-        h4{ 
-            size: 100%; ; 
-        } 
- 
-        iframe { 
-            width: 100%; 
-            height: 400px; 
-        } 
-        ul { 
-            list-style-type: none; 
-            padding: 0; 
-        } 
- 
-        li { 
-            margin: 10px 0; 
-            text-align: center; /* توسيط النص */ 
-        } 
-        a:hover { 
-            background-color: gold; 
-        } 
-        a { 
-            text-decoration: none; 
-            color: #333; 
-            display: block; 
-            padding: 20px; 
-            border-radius: 5px; 
-            background-color: red; 
-            transition: background-color 0.3s; /* تغيير لون الخلفية عند التحويل */ 
-        } 
- 
-        p { 
-            text-align: justify; 
-        } 
-    </style> 
-</head> 
-<body> 
-    <header> 
-        <h1>movieloz</h1> 
-    </header> 
-    <div class="container"> 
-        <iframe src="https://vidsrc.me/embed/movie?imdb=tt2024544" frameborder="0" allowfullscreen></iframe> 
-        <h2></h2> 
-        <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
-<br>[ Arabic ] و اختار كلمة 
-<br>إذا كانت هناك أخطاء في الترجمة أو تأخير أو تسريع، أو السيرفر لا يعمل، أرجوك أنسخ الرابط وأرسله إلينا بسرعة لتغييره ، من خلال الذهاب إلى صفحة اتصل بنا</h3>
+    <meta name="description" content="لأحدث الافلام و المسلسلات">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
 
+        header {
+            background-color: #333;
+            color: hsl(0, 94%, 46%);
+            text-align: center;
+            padding: 10px;
+        }
 
-    <a href="../../Movies">رجوع</a> 
-</div> 
-</body> 
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 18px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        iframe {
+            width: 100%;
+            height: 400px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: red;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: gold;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .movie-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .movie-poster {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .movie-info {
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .movie-info p {
+            margin-bottom: 10px;
+        }
+
+        .movie-title {
+            color: #ff0000;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>movieloz</h1>
+</header>
+
+<div class="container">
+    <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
+    <div id="movieInfo" class="movie-info"></div>
+    <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
+
+    <iframe src="https://vidsrc.me/embed/movie?imdb=tt0147800" frameborder="0" allowfullscreen></iframe>
+    <h2></h2>
+    <a href="../../Movies">رجوع</a>
+</div>
+
+<script>
+    const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
+    const imdbMovieId = 'tt0147800'; // Example IMDb movie ID (Arabic movie "خط الموت")
+    const apiUrl = `https://api.themoviedb.org/3/find/${imdbMovieId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const tmdbMovieId = data.movie_results[0].id;
+            const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
+
+            fetch(tmdbApiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const posterUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
+                    document.getElementById('moviePoster').src = posterUrl;
+
+                    const movieInfo = `
+                        <h2 class="movie-title">${data.title}</h2>
+                        <div class="movie-details">
+                            <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                            <p><strong>Rate:</strong> ${data.vote_average}</p>
+                            <p><strong>Story:</strong> ${data.overview}</p>
+                        </div>
+                    `;
+                    document.getElementById('movieInfo').innerHTML = movieInfo;
+
+                    // Fetch movie trailer
+                    const trailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=en`;
+                    fetch(trailerUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            const trailerKey = data.results[0].key;
+                            const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
+                            const trailerContainer = document.getElementById('trailerContainer');
+                            trailerContainer.innerHTML = `
+                                <h3>Movie Trailer</h3>
+                                <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+                            `;
+                        })
+                        .catch(error => console.error('Error fetching movie trailer:', error));
+                })
+                .catch(error => console.error('Error fetching movie details:', error));
+        })
+        .catch(error => console.error('Error fetching movie ID from IMDb:', error));
+</script>
+</body>
 </html>
