@@ -86,7 +86,7 @@
     // Fetch movie poster using OMDB API
     const omdbApiKey = 'c360e39d';
     const imdbId = 'tt12637874';
-    const posterUrl = `http://www.omdbapi.com/?i=${imdbId}&apikey=${omdbApiKey}`;
+    const posterUrl = `https://www.omdbapi.com/?i=${imdbId}&apikey=${omdbApiKey}`;
 
     fetch(posterUrl)
         .then(response => response.json())
