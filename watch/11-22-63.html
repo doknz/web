@@ -122,7 +122,7 @@
 
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const mediaIds = ['tt0800069'];
+    const mediaIds = ['tt2879552']; // هنا يمكنك تغيير id الفيلم أو المسلسل
 
     mediaIds.forEach(mediaId => {
         const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
@@ -130,14 +130,14 @@
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                if (data.movie_results.length > 0) {
+                if (data.movie_results.length > 0) { // إذا كانت البيانات تخص فيلم
                     const tmdbMovieId = data.movie_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
-                    displayMediaDetails(tmdbApiUrl);
-                } else if (data.tv_results.length > 0) {
+                    displayMediaDetails(tmdbApiUrl, 'movie');
+                } else if (data.tv_results.length > 0) { // إذا كانت البيانات تخص مسلسل
                     const tmdbTvId = data.tv_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
-                    displayMediaDetails(tmdbApiUrl);
+                    displayMediaDetails(tmdbApiUrl, 'tv');
                 } else {
                     console.error('No data found for media with ID:', mediaId);
                 }
@@ -145,7 +145,7 @@
             .catch(error => console.error('Error fetching media details:', error));
     });
 
-    function displayMediaDetails(apiUrl) {
+    function displayMediaDetails(apiUrl, type) {
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
@@ -161,26 +161,32 @@
                 `;
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
 
-                const trailerUrl = `https://api.themoviedb.org/3/movie/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
-                fetch(trailerUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        if(data.results.length > 0) {
-                            const trailerKey = data.results[0].key;
-                            const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
-                            const trailerContainer = document.getElementById('trailerContainer');
-                            trailerContainer.innerHTML = `
-                                <h3>أعلان الفيلم</h3>
-                                <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
-                            `;
-                        } else {
-                            console.error('No trailer found for this movie.');
-                        }
-                    })
-                    .catch(error => console.error('Error fetching movie trailer:', error));
+                if (type === 'movie') { // إذا كانت البيانات تخص فيلم
+                    const trailerUrl = `https://api.themoviedb.org/3/movie/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
+                    fetch(trailerUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.results.length > 0) {
+                                const trailerKey = data.results[0].key;
+                                const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
+                                const trailerContainer = document.getElementById('trailerContainer');
+                                trailerContainer.innerHTML = `
+                                    <h3>أعلان الفيلم</h3>
+                                    <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+                                `;
+                            } else {
+                                console.error('No trailer found for this movie.');
+                            }
+                        })
+                        .catch(error => console.error('Error fetching movie trailer:', error));
+                } else if (type === 'tv') { // إذا كانت البيانات تخص مسلسل
+                    // يمكنك إضافة عرض الإعلانات الخاصة بالمسلسل هنا
+                    console.log('TV Show Detected');
+                }
             })
             .catch(error => console.error('Error fetching media details:', error));
     }
 </script>
 </body>
 </html>
+
