@@ -132,21 +132,24 @@
             .catch(error => console.error('Error fetching media details:', error));
     });
 
-    function displayMediaDetails(apiUrl) {    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const mediaInfo = `
-                <h2 class="movie-title">${data.title || data.name}</h2>
-                <div class="movie-details">
-                    <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                    <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
-                    <p><strong>Story:</strong> ${data.overview}</p>
-                </div>
-            `;
-            document.getElementById('movieInfo').innerHTML = mediaInfo;
-        })
-        .catch(error => console.error('Error fetching media details:', error));
-}
+    function displayMediaDetails(apiUrl) {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const mediaInfo = `
+                    <h2 class="movie-title">${data.title || data.name}</h2>
+                    <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
+                    <div class="movie-details">
+                        <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                        <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
+                        <p><strong>Story:</strong> ${data.overview}</p>
+                    </div>
+                `;
+                document.getElementById('movieInfo').innerHTML = mediaInfo;
+            })
+            .catch(error => console.error('Error fetching media details:', error));
+    }
 </script>
+
 </body>
 </html>
