@@ -109,49 +109,75 @@
 
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const imdbMovieId = 'tt14674086'; // Example IMDb movie ID (Arabic movie "خط الموت")
-    const apiUrl = `https://api.themoviedb.org/3/find/${imdbMovieId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
+    const mediaIds = ['tt14674086']; // أمثلة على معرفات الأفلام أو المسلسلات أو الأنمي
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const tmdbMovieId = data.movie_results[0].id;
-            const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
+    mediaIds.forEach(mediaId => {
+        const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
 
-            fetch(tmdbApiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    const posterUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
-                    document.getElementById('moviePoster').src = posterUrl;
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.movie_results.length > 0) { // Check if it's a movie
+                    const tmdbMovieId = data.movie_results[0].id;
+                    const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
+                    
+                    displayMediaDetails(tmdbApiUrl, mediaId);
+                } else if (data.tv_results.length > 0) { // Check if it's a TV show
+                    const tmdbTvId = data.tv_results[0].id;
+                    const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
+                    
+                    displayMediaDetails(tmdbApiUrl, mediaId);
+                } else if (data.tv_episode_results.length > 0) { // Check if it's an episode
+                    const tmdbTvId = data.tv_episode_results[0].show_id;
+                    const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
+                    
+                    displayMediaDetails(tmdbApiUrl, mediaId);
+                } else {
+                    console.error('No data found for media with ID:', mediaId);
+                }
+            })
+            .catch(error => console.error('Error fetching media details:', error));
+    });
 
-                    const movieInfo = `
-                        <h2 class="movie-title">${data.title}</h2>
-                        <div class="movie-details">
-                            <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                            <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
-                            <p><strong>Story:</strong> ${data.overview}</p>
-                        </div>
-                    `;
-                    document.getElementById('movieInfo').innerHTML = movieInfo;
+    function displayMediaDetails(apiUrl, mediaId) {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const posterUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
+                const mediaInfo = `
+                    <h2 class="movie-title">${data.title || data.name}</h2>
+                    <div class="movie-details">
+                        <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                        <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
+                        <p><strong>Story:</strong> ${data.overview}</p>
+                    </div>
+                `;
+                const trailerUrl = `https://api.themoviedb.org/3/${data.hasOwnProperty('title') ? 'movie' : 'tv'}/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
 
-                    // Fetch movie trailer
-                    const trailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=en`;
-                    fetch(trailerUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            const trailerKey = data.results[0].key;
-                            const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
-                            const trailerContainer = document.getElementById('trailerContainer');
-                            trailerContainer.innerHTML = `
-                                <h3>أعلان المسلسل</h3>
-                                <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
-                            `;
-                        })
-                        .catch(error => console.error('Error fetching movie trailer:', error));
-                })
-                .catch(error => console.error('Error fetching movie details:', error));
-        })
-        .catch(error => console.error('Error fetching movie ID from IMDb:', error));
+                fetch(trailerUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        const trailerKey = data.results[0].key;
+                        const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
+                        const trailerContainer = document.createElement('div');
+                        trailerContainer.innerHTML = `
+                            <h3>أعلان ${data.hasOwnProperty('title') ? 'الفيلم' : 'المسلسل'}</h3>
+                            <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+                        `;
+
+                        const container = document.createElement('div');
+                        container.classList.add('container');
+                        container.innerHTML = `
+                            <img class="movie-poster" src="${posterUrl}" alt="Movie Poster">
+                            <div class="movie-info">${mediaInfo}</div>
+                        `;
+                        container.appendChild(trailerContainer);
+                        document.body.appendChild(container);
+                    })
+                    .catch(error => console.error('Error fetching media trailer:', error));
+            })
+            .catch(error => console.error('Error fetching media details:', error));
+    }
 </script>
 </body>
 </html>
