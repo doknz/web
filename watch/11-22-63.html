@@ -4,7 +4,7 @@
     <title>movieloz</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="لأحدث الافلام و المسلسلات">
+    <meta name="description" content="أحدث الأفلام والمسلسلات">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,6 +84,15 @@
             font-size: 24px;
             margin-bottom: 10px;
         }
+
+        .trailer-container {
+            margin-top: 20px;
+        }
+
+        .trailer-container iframe {
+            width: 100%;
+            height: 315px;
+        }
     </style>
 </head>
 
@@ -93,38 +102,39 @@
 </header>
 
 <div class="container">
-    <!-- هنا تعرض معلومات الفيلم أو المسلسل -->
-    <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
+    <!-- تعرض هنا معلومات الفيلم أو المسلسل -->
     <div id="movieInfo" class="movie-info"></div>
-    <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
+    <!-- تعرض هنا معلومات الفيلم -->
+    <div id="trailerContainer" class="trailer-container"></div>
+    <!-- تعرض هنا مشاهدة المسلسل -->
     <h2>مشاهدة المسلسل</h2>
-    <!-- هنا يتم عرض الفيديو -->
+    <!-- تعرض هنا الفيديو -->
     <iframe src="https://vidsrc.me/embed/tv?imdb=tt2879552" frameborder="0" allowfullscreen></iframe>
+    <!-- نص الإرشادات -->
     <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
     <br>[ Arabic ] و اختار كلمة 
     <br>للتغير الى الحلقات والمواسم 
     <br>اضغط على المربع الموجود 
     <br>في أعلى يسار المشغل </h3>
+    <!-- الرابط للعودة -->
     <a href="../Series">رجوع</a>
 </div>
 
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const mediaIds = ['tt2879552']; // معرفات الأفلام أو المسلسلات أو الأنمي
+    const mediaIds = ['tt2879552'];
 
     mediaIds.forEach(mediaId => {
-const apiUrl = https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id;
-
-
+        const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
 
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                if (data.movie_results.length > 0) { // إذا كانت البيانات تخص فيلم
+                if (data.movie_results.length > 0) {
                     const tmdbMovieId = data.movie_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
                     displayMediaDetails(tmdbApiUrl);
-                } else if (data.tv_results.length > 0) { // إذا كانت البيانات تخص مسلسل
+                } else if (data.tv_results.length > 0) {
                     const tmdbTvId = data.tv_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
                     displayMediaDetails(tmdbApiUrl);
@@ -151,7 +161,6 @@ const apiUrl = https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey
                 `;
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
 
-                // Add trailer code here
                 const trailerUrl = `https://api.themoviedb.org/3/movie/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
                 fetch(trailerUrl)
                     .then(response => response.json())
@@ -159,7 +168,7 @@ const apiUrl = https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey
                         if(data.results.length > 0) {
                             const trailerKey = data.results[0].key;
                             const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
-                            const trailerContainer = document.getElementById('trailerContainer'); // تغيير العنصر المستهدف
+                            const trailerContainer = document.getElementById('trailerContainer');
                             trailerContainer.innerHTML = `
                                 <h3>أعلان الفيلم</h3>
                                 <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
