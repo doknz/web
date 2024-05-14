@@ -113,7 +113,8 @@
     const mediaIds = ['tt2879552']; // معرفات الأفلام أو المسلسلات أو الأنمي
 
     mediaIds.forEach(mediaId => {
-        const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
+        const apiUrl = `https://api.themoviedb.org/3/find/${imdbMovieId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
+
 
         fetch(apiUrl)
             .then(response => response.json())
