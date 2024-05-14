@@ -152,7 +152,7 @@
             })
             .catch(error => console.error('Error fetching media details:', error));
     }
-    const trailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=en`;
+               const trailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=en`;
                     fetch(trailerUrl)
                         .then(response => response.json())
                         .then(data => {
