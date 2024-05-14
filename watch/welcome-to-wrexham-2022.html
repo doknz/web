@@ -86,7 +86,27 @@
         }
     </style>
 </head>
+<body>
+<header>
+    <h1>movieloz</h1>
+</header>
+<div class="container">
+    <div id="movieInfo" class="movie-info"></div>
+    <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
+    <h2>مشاهدة الفيلم</h2>
+    <iframe src="https://vidsrc.to/embed/tv/tt14674086" frameborder="0" allowfullscreen></iframe>
+    <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
+    <br>[ Arabic ] و اختار كلمة 
+    <br> و اختار الترجمة المناسبة ، قم بتغيير الترجمة اذا في تاخير او تسريع 
+    <br> اذا لم تجد الترجمة المناسبة وجميع الترجمات العربية متاخرة او مسرعة او السيرفر لا يعمل  أرجوك قم بنسخ الرابط وأرسله لنا بسرعة لتغييره  
+    <br>  من خلال الذهاب الى صفحة اتصل بنا
+        </h3>
+    
+    <a href="../../Movies">رجوع</a>
+</div>
 
+
+</body>
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
     const mediaIds = ['tt2879552']; // أمثلة على معرفات الأفلام أو المسلسلات أو الأنمي
@@ -159,25 +179,5 @@
             .catch(error => console.error('Error fetching media details:', error));
     }
 </script>
-<body>
-<header>
-    <h1>movieloz</h1>
-</header>
-<div class="container">
-    <div id="movieInfo" class="movie-info"></div>
-    <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
-    <h2>مشاهدة الفيلم</h2>
-    <iframe src="https://vidsrc.to/embed/tv/tt14674086" frameborder="0" allowfullscreen></iframe>
-    <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
-    <br>[ Arabic ] و اختار كلمة 
-    <br> و اختار الترجمة المناسبة ، قم بتغيير الترجمة اذا في تاخير او تسريع 
-    <br> اذا لم تجد الترجمة المناسبة وجميع الترجمات العربية متاخرة او مسرعة او السيرفر لا يعمل  أرجوك قم بنسخ الرابط وأرسله لنا بسرعة لتغييره  
-    <br>  من خلال الذهاب الى صفحة اتصل بنا
-        </h3>
-    
-    <a href="../../Movies">رجوع</a>
-</div>
 
-
-</body>
 </html>
