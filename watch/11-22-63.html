@@ -86,19 +86,30 @@
         }
     </style>
 </head>
+
 <body>
-    <header>
-        <h1>movieloz</h1>
-    </header>
-    <!-- تم إضافة الأفلام أو المسلسلات هنا -->
+<header>
+    <h1>movieloz</h1>
+</header>
 
-</body>
+<div class="container">
+    <!-- هنا تعرض معلومات الفيلم أو المسلسل -->
+    <div id="movieInfo" class="movie-info"></div>
+    <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
+    <h2>مشاهدة الفيلم</h2>
+    <!-- هنا يتم عرض الفيديو -->
+    <iframe src="https://vidsrc.me/embed/tv?imdb=tt3148266" frameborder="0" allowfullscreen></iframe>
+    <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
+    <br>[ Arabic ] و اختار كلمة 
+    <br>للتغير الى الحلقات والمواسم 
+    <br>اضغط على المربع الموجود 
+    <br>في أعلى يسار المشغل </h3>
+    <a href="../Series">رجوع</a>
+</div>
 
-    
-<body>    
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const mediaIds = ['tt0800069']; // أمثلة على معرفات الأفلام أو المسلسلات أو الأنمي
+    const mediaIds = ['tt3148266']; // معرفات الأفلام أو المسلسلات أو الأنمي
 
     mediaIds.forEach(mediaId => {
         const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
@@ -106,21 +117,14 @@
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                if (data.movie_results.length > 0) { // Check if it's a movie
+                if (data.movie_results.length > 0) { // إذا كانت البيانات تخص فيلم
                     const tmdbMovieId = data.movie_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
-
-                    displayMediaDetails(tmdbApiUrl, mediaId);
-                } else if (data.tv_results.length > 0) { // Check if it's a TV show
+                    displayMediaDetails(tmdbApiUrl);
+                } else if (data.tv_results.length > 0) { // إذا كانت البيانات تخص مسلسل
                     const tmdbTvId = data.tv_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
-
-                    displayMediaDetails(tmdbApiUrl, mediaId);
-                } else if (data.tv_episode_results.length > 0) { // Check if it's an episode
-                    const tmdbTvId = data.tv_episode_results[0].show_id;
-                    const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
-
-                    displayMediaDetails(tmdbApiUrl, mediaId);
+                    displayMediaDetails(tmdbApiUrl);
                 } else {
                     console.error('No data found for media with ID:', mediaId);
                 }
@@ -128,62 +132,18 @@
             .catch(error => console.error('Error fetching media details:', error));
     });
 
-    function displayMediaDetails(apiUrl, mediaId) {
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const posterUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
-                const mediaInfo = `
-                    <h2 class="movie-title">${data.title || data.name}</h2>
-                    <div class="movie-details">
-                        <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                        <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
-                        <p><strong>Story:</strong> ${data.overview}</p>
-                    </div>
-                `;
-                const trailerUrl = `https://api.themoviedb.org/3/${data.hasOwnProperty('title') ? 'movie' : 'tv'}/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
-
-                fetch(trailerUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        const trailerKey = data.results[0].key;
-                        const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
-                        const trailerContainer = document.createElement('div');
-                        trailerContainer.innerHTML = `
-                            <h3>أعلان ${data.hasOwnProperty('title') ? 'الفيلم' : 'المسلسل'}</h3>
-                            <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
-                        `;
-
-                        const container = document.createElement('div');
-                        container.classList.add('container');
-                        container.innerHTML = `
-                            <img class="movie-poster" src="${posterUrl}" alt="Movie Poster">
-                            <div class="movie-info">${mediaInfo}</div>
-                        `;
-                        container.appendChild(trailerContainer);
-                        document.body.appendChild(container);
-                    })
-                    .catch(error => console.error('Error fetching media trailer:', error));
-            })
-            .catch(error => console.error('Error fetching media details:', error));
-    }
-</script>
-
-</body>
-
-    <body>
-    <div class="container"> 
-        <iframe src="https://vidsrc.me/embed/tv?imdb=tt3148266" frameborder="0" allowfullscreen></iframe> 
-        <h2></h2> 
-        <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
-<br>[ Arabic ] و اختار كلمة 
-<br>للتغير الى الحلقات والمواسم 
-<br>اضغط على المربع الموجود 
-<br>في أعلى يسار المشغل </h3> 
-    <a href="../Series">رجوع</a> 
-    </div> 
-    
-    </body>
-
-
-</html>
+    function displayMediaDetails(apiUrl) {    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const mediaInfo = `
+                <h2 class="movie-title">${data.title || data.name}</h2>
+                <div class="movie-details">
+                    <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                    <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
+                    <p><strong>Story:</strong> ${data.overview}</p>
+                </div>
+            `;
+            document.getElementById('movieInfo').innerHTML = mediaInfo;
+        })
+        .catch(error => console.error('Error fetching media details:', error));
+}
