@@ -26,11 +26,10 @@
             padding: 20px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: left; /* تحديد محاذاة النص إلى اليسار */
+            text-align: center;
             font-size: 18px;
             border-radius: 10px;
             overflow: hidden;
-            display: flex; /* استخدام نمط العرض اللولبي لترتيب العناصر */
         }
 
         iframe {
@@ -38,38 +37,52 @@
             height: 400px;
         }
 
-        .movie-poster-container {
-            width: 200px; /* تحديد عرض حاوية البوستر */
-            height: 300px; /* تحديد ارتفاع حاوية البوستر */
-            background-color: black; /* تحديد لون خلفية حاوية البوستر */
-            border-radius: 20px; /* تحديد حواف مستديرة لحاوية البوستر */
-            overflow: hidden; /* إخفاء أي محتوى يتجاوز حاوية البوستر */
-            margin-right: 20px; /* تحديد هوامش اليمين لحاوية البوستر */
+        a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: red;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: gold;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .movie-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .movie-poster {
-            width: 100%; /* جعل حجم البوستر يملأ حاوية البوستر بالكامل */
-            height: auto; /* السماح بتعديل الارتفاع تلقائيًا بناءً على عرض الصورة */
-            border-radius: 20px; /* تحديد حواف مستديرة للبوستر نفسه */
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .movie-info {
-            flex: 1; /* القيمة التلقائية هي 1، وتعني توسيع المساحة المتاحة للعنصر */
+            text-align: center;
+            padding: 0 20px;
         }
 
         .movie-info p {
-            margin-bottom: 5px; /* تقليل المسافة بين الفقرات */
+            margin-bottom: 10px;
         }
 
         .movie-title {
             color: #ff0000;
             font-size: 24px;
             margin-bottom: 10px;
-        }
-
-        .movie-details {
-            text-align: left; /* تحديد محاذاة النص إلى اليسار داخل عنصر .movie-info */
-            padding: 0 20px;
         }
     </style>
 </head>
@@ -79,19 +92,24 @@
 </header>
 
 <div class="container">
-    <div class="movie-poster-container">
-        <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
-    </div>
-    <div class="movie-info">
-        <h2 class="movie-title">اسم الفيلم</h2>
-        <div id="movieInfo" class="movie-details"></div>
-        <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
-    </div>
+    <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
+    <div id="movieInfo" class="movie-info"></div>
+    <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
+    <h2>مشاهدة الفيلم</h2>
+    <iframe src="https://vidsrc.me/embed/movie?imdb=tt0050083" frameborder="0" allowfullscreen></iframe>
+    <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
+    <br>[ Arabic ] و اختار كلمة 
+    <br> و اختار الترجمة المناسبة ، قم بتغيير الترجمة اذا في تاخير او تسريع 
+    <br> اذا لم تجد الترجمة المناسبة وجميع الترجمات العربية متاخرة او مسرعة او السيرفر لا يعمل  أرجوك قم بنسخ الرابط وأرسله لنا بسرعة لتغييره  
+    <br>  من خلال الذهاب الى صفحة اتصل بنا
+        </h3>
+    
+    <a href="../../Movies">رجوع</a>
 </div>
 
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const imdbMovieId = 'tt2024544'; // Example IMDb movie ID (Arabic movie "خط الموت")
+    const imdbMovieId = 'tt0050083'; // Example IMDb movie ID (Arabic movie "خط الموت")
     const apiUrl = `https://api.themoviedb.org/3/find/${imdbMovieId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
 
     fetch(apiUrl)
@@ -107,9 +125,12 @@
                     document.getElementById('moviePoster').src = posterUrl;
 
                     const movieInfo = `
-                        <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                        <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
-                        <p><strong>Story:</strong> ${data.overview}</p>
+                        <h2 class="movie-title">${data.title}</h2>
+                        <div class="movie-details">
+                            <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                            <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
+                            <p><strong>Story:</strong> ${data.overview}</p>
+                        </div>
                     `;
                     document.getElementById('movieInfo').innerHTML = movieInfo;
 
