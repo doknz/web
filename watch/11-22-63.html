@@ -88,36 +88,7 @@
 </head>
 
 <script>
-    const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const mediaIds = ['tt0800069']; // أمثلة على معرفات الأفلام أو المسلسلات أو الأنمي
-
-    mediaIds.forEach(mediaId => {
-        const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                if (data.movie_results.length > 0) { // Check if it's a movie
-                    const tmdbMovieId = data.movie_results[0].id;
-                    const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
-                    
-                    displayMediaDetails(tmdbApiUrl, mediaId);
-                } else if (data.tv_results.length > 0) { // Check if it's a TV show
-                    const tmdbTvId = data.tv_results[0].id;
-                    const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
-                    
-                    displayMediaDetails(tmdbApiUrl, mediaId);
-                } else if (data.tv_episode_results.length > 0) { // Check if it's an episode
-                    const tmdbTvId = data.tv_episode_results[0].show_id;
-                    const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
-                    
-                    displayMediaDetails(tmdbApiUrl, mediaId);
-                } else {
-                    console.error('No data found for media with ID:', mediaId);
-                }
-            })
-            .catch(error => console.error('Error fetching media details:', error));
-    });
+    // الكود السابق لا يوجد تغيير فيه
 
     function displayMediaDetails(apiUrl, mediaId) {
         fetch(apiUrl)
@@ -153,6 +124,21 @@
                         `;
                         container.appendChild(trailerContainer);
                         document.body.appendChild(container);
+
+                        // هنا يمكنك وضع الكود الذي تريد إضافته بعد عرض المعلومات
+                        const additionalContent = `
+                            <div class="container"> 
+                                <iframe src="https://vidsrc.me/embed/tv?imdb=tt3148266" frameborder="0" allowfullscreen></iframe> 
+                                <h2></h2> 
+                                <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
+                                <br>[ Arabic ] و اختار كلمة 
+                                <br>للتغير الى الحلقات والمواسم 
+                                <br>اضغط على المربع الموجود 
+                                <br>في أعلى يسار المشغل </h3> 
+                                <a href="../Series">رجوع</a> 
+                            </div> 
+                        `;
+                        document.body.innerHTML += additionalContent;
                     })
                     .catch(error => console.error('Error fetching media trailer:', error));
             })
@@ -163,15 +149,5 @@
 <header>
     <h1>movieloz</h1>
 </header>
-    <div class="container"> 
-        <iframe src="https://vidsrc.me/embed/tv?imdb=tt3148266" frameborder="0" allowfullscreen></iframe> 
-        <h2></h2> 
-        <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
-<br>[ Arabic ] و اختار كلمة 
-<br>للتغير الى الحلقات والمواسم 
-<br>اضغط على المربع الموجود 
-<br>في أعلى يسار المشغل </h3> 
-    <a href="../Series">رجوع</a> 
-</div> 
 </body>
 </html>
