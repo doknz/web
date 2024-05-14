@@ -38,10 +38,19 @@
             height: 400px;
         }
 
+        .movie-poster-container {
+            width: 200px; /* تحديد عرض حاوية البوستر */
+            height: 300px; /* تحديد ارتفاع حاوية البوستر */
+            background-color: black; /* تحديد لون خلفية حاوية البوستر */
+            border-radius: 20px; /* تحديد حواف مستديرة لحاوية البوستر */
+            overflow: hidden; /* إخفاء أي محتوى يتجاوز حاوية البوستر */
+            margin-right: 20px; /* تحديد هوامش اليمين لحاوية البوستر */
+        }
+
         .movie-poster {
-            max-width: 200px; /* تحديد حجم أقصى للبوستر */
-            border-radius: 10px;
-            margin-right: 20px; /* تحديد هوامش اليمين للبوستر */
+            width: 100%; /* جعل حجم البوستر يملأ حاوية البوستر بالكامل */
+            height: auto; /* السماح بتعديل الارتفاع تلقائيًا بناءً على عرض الصورة */
+            border-radius: 20px; /* تحديد حواف مستديرة للبوستر نفسه */
         }
 
         .movie-info {
@@ -70,8 +79,11 @@
 </header>
 
 <div class="container">
-    <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
+    <div class="movie-poster-container">
+        <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
+    </div>
     <div class="movie-info">
+        <h2 class="movie-title">اسم الفيلم</h2>
         <div id="movieInfo" class="movie-details"></div>
         <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
     </div>
@@ -95,12 +107,9 @@
                     document.getElementById('moviePoster').src = posterUrl;
 
                     const movieInfo = `
-                        <h2 class="movie-title">${data.title}</h2>
-                        <div class="movie-details">
-                            <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                            <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
-                            <p><strong>Story:</strong> ${data.overview}</p>
-                        </div>
+                        <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                        <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
+                        <p><strong>Story:</strong> ${data.overview}</p>
                     `;
                     document.getElementById('movieInfo').innerHTML = movieInfo;
 
