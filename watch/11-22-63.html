@@ -161,7 +161,7 @@
                 `;
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
 
-                const trailerUrl = `https://api.themoviedb.org/3/movie/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
+                const trailerUrl = `https://api.themoviedb.org/3/movie/${mediaId}/videos?api_key=${tmdbApiKey}&language=en`;
                 fetch(trailerUrl)
                     .then(response => response.json())
                     .then(data => {
