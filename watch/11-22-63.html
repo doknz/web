@@ -154,6 +154,24 @@
     }
                
 </script>
-
+<script>
+const trailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=en`;
+                    fetch(trailerUrl)
+                        .then(response => response.json())
+                        .then(data => {
+                            const trailerKey = data.results[0].key;
+                            const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
+                            const trailerContainer = document.getElementById('trailerContainer');
+                            trailerContainer.innerHTML = `
+                                <h3>أعلان الفيلم</h3>
+                                <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+                            `;
+                        })
+                        .catch(error => console.error('Error fetching movie trailer:', error));
+                })
+                .catch(error => console.error('Error fetching movie details:', error));
+        })
+        .catch(error => console.error('Error fetching movie ID from IMDb:', error));
+</script>
 </body>
 </html>
