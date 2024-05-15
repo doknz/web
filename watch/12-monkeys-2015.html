@@ -108,7 +108,7 @@
 </div>
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const mediaIds = ['tt0800069']; // You can change the movie, series, or anime ID here
+    const mediaIds = ['tt0800069']; // يمكنك تغيير id الفيلم أو المسلسل أو الأنمي هنا
 
     mediaIds.forEach(mediaId => {
         const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
@@ -150,8 +150,12 @@
                 const videoType = type === 'movie' ? 'movie' : 'tv';
                 const videoUrl = `https://api.themoviedb.org/3/${videoType}/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
                 fetch(videoUrl)
-                    .then(response => response.json())
+                    .then(response => {
+                        console.log('Response status:', response.status);
+                        return response.json();
+                    })
                     .then(videoData => {
+                        console.log('Video data:', videoData);
                         if (videoData.results.length > 0) {
                             const videoKey = videoData.results[0].key;
                             const videoEmbedUrl = `https://www.youtube.com/embed/${videoKey}`;
