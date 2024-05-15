@@ -143,6 +143,7 @@
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
+                console.log(data.original_language);
                 const imdbRating = (Math.round(data.vote_average * 10) / 10).toFixed(1);
                 const trimmedOverview = data.overview.trim();
 const mediaInfo = `
