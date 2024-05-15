@@ -146,16 +146,33 @@
             console.log(data.original_language); // سيتم طباعة قيمة لغة العرض الأصلية في وحدة التحكم
             const imdbRating = (Math.round(data.vote_average * 10) / 10).toFixed(1);
             const trimmedOverview = data.overview.trim();
-            const mediaInfo = `
-                <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
-                <h2 class="movie-title">${data.original_language === 'en' ? data.title || data.name : data.title || data.name}</h2> <!-- هنا يتم استخدام لغة العرض الأصلية لتحديد العنوان -->
-                <div class="movie-details">
-                    <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                    <p><strong>IMDB:</strong> ${imdbRating}/10</p>
-                    <p><strong>Story:</strong> <span class="story">${trimmedOverview}</span></p>
-                </div>
-            `;
-            document.getElementById('movieInfo').innerHTML = mediaInfo;
+            const translate = require('google-translate-api');
+
+translate(data.title || data.name, { from: 'ar', to: 'en' }).then(translatedTitle => {
+    const mediaInfo = `
+        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
+        <h2 class="movie-title">${translatedTitle.text}</h2> <!-- هنا يتم عرض العنوان المترجم -->
+        <div class="movie-details">
+            <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+            <p><strong>IMDB:</strong> ${imdbRating}/10</p>
+            <p><strong>Story:</strong> <span class="story">${trimmedOverview}</span></p>
+        </div>
+    `;
+    document.getElementById('movieInfo').innerHTML = mediaInfo;
+}).catch(err => {
+    console.error('Error translating title:', err);
+    // في حالة وجود خطأ في الترجمة، يمكنك استخدام العنوان الأصلي باللغة العربية
+    const mediaInfo = `
+        <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
+        <h2 class="movie-title">${data.title || data.name}</h2> <!-- هنا يتم عرض العنوان الأصلي باللغة العربية -->
+        <div class="movie-details">
+            <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+            <p><strong>IMDB:</strong> ${imdbRating}/10</p>
+            <p><strong>Story:</strong> <span class="story">${trimmedOverview}</span></p>
+        </div>
+    `;
+    document.getElementById('movieInfo').innerHTML = mediaInfo;
+});
 
             const videoType = type === 'movie' ? 'movie' : 'tv';
             const videoUrl = `https://api.themoviedb.org/3/${videoType}/${data.id}?api_key=${tmdbApiKey}&append_to_response=videos`;
