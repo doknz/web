@@ -86,7 +86,7 @@
         }
         
         .story {
-    font-size: 23px; /* حجم الخط المناسب */
+    font-size: 16px; /* حجم الخط المناسب */
     margin: 0; /* إزالة الهامش الافتراضي */
 }
         
@@ -149,8 +149,7 @@ const mediaInfo = `
     <div class="movie-details">
         <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
         <p><strong>IMDB:</strong> ${imdbRating}/10</p>
-        <p><strong>Story:</strong></p>
-        <p class="story">${trimmedOverview}</p>
+        <p><strong>Story:</strong> ${trimmedOverview}</p>
     </div>
 `;
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
