@@ -150,7 +150,8 @@ const mediaInfo = `
     <div class="movie-details">
         <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
         <p><strong>IMDB:</strong> ${imdbRating}/10</p>
-        <p><strong>Story:</strong> <span class="story">${trimmedOverview}</span></p>
+        <p><strong>Story:</strong></p>
+        <pre class="story">${trimmedOverview}</pre>
     </div>
 `;
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
