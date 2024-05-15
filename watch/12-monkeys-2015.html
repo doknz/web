@@ -116,42 +116,68 @@
         .then(response => response.json())
         .then(data => {
             const tmdbMovieId = data.movie_results[0].id;
-            const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
+            mediaIds.forEach(mediaId => {
+        const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
 
-            fetch(tmdbApiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    const posterUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
-                    document.getElementById('moviePoster').src = posterUrl;
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.movie_results.length > 0) { // إذا كانت البيانات تخص فيلم
+                    const tmdbMovieId = data.movie_results[0].id;
+                    const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
+                    displayMediaDetails(tmdbApiUrl, 'movie');
+                } else if (data.tv_results.length > 0) { // إذا كانت البيانات تخص مسلسل
+                    const tmdbTvId = data.tv_results[0].id;
+                    const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
+                    displayMediaDetails(tmdbApiUrl, 'tv');
+                } else {
+                    console.error('No data found for media with ID:', mediaId);
+                }
+            })
+            .catch(error => console.error('Error fetching media details:', error));
+    });
 
-                    const movieInfo = `
-                        <h2 class="movie-title">${data.title}</h2>
-                        <div class="movie-details">
-                            <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                            <p><strong>IMDB:</strong> ${data.vote_average}/10</p>
-                            <p><strong>Story:</strong> ${data.overview}</p>
-                        </div>
-                    `;
-                    document.getElementById('movieInfo').innerHTML = movieInfo;
+    function displayMediaDetails(apiUrl, type) {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const imdbRating = (Math.round(data.vote_average * 10) / 10).toFixed(1);
+                const mediaInfo = `
+                    <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
+                    <h2 class="movie-title">${data.title || data.name}</h2>
+                    <div class="movie-details">
+                        <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                        <p><strong>IMDB:</strong> ${imdbRating}/10</p>
+                        <p><strong>Story:</strong> ${data.overview}</p>
+                    </div>
+                `;
+                document.getElementById('movieInfo').innerHTML = mediaInfo;
 
-                    // Fetch movie trailer
-                    const trailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=en`;
+                if (type === 'movie') { // إذا كانت البيانات تخص فيلم
+                    const trailerUrl = `https://api.themoviedb.org/3/movie/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
                     fetch(trailerUrl)
                         .then(response => response.json())
                         .then(data => {
-                            const trailerKey = data.results[0].key;
-                            const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
-                            const trailerContainer = document.getElementById('trailerContainer');
-                            trailerContainer.innerHTML = `
-                                <h3>أعلان الفيلم</h3>
-                                <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
-                            `;
+                            if (data.results.length > 0) {
+                                const trailerKey = data.results[0].key;
+                                const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
+                                const trailerContainer = document.getElementById('trailerContainer');
+                                trailerContainer.innerHTML = `
+                                    <h3>أعلان الفيلم</h3>
+                                    <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+                                `;
+                            } else {
+                                console.error('No trailer found for this movie.');
+                            }
                         })
                         .catch(error => console.error('Error fetching movie trailer:', error));
-                })
-                .catch(error => console.error('Error fetching movie details:', error));
-        })
-        .catch(error => console.error('Error fetching movie ID from IMDb:', error));
+                } else if (type === 'tv') { // إذا كانت البيانات تخص مسلسل
+                    // يمكنك إضافة عرض الإعلانات الخاصة بالمسلسل هنا
+                    console.log('TV Show Detected');
+                }
+            })
+            .catch(error => console.error('Error fetching media details:', error));
+    }
 </script>
 </body>
 </html>
