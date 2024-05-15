@@ -109,7 +109,7 @@
 
 <script>
   const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const mediaIds = ['tt0800069']; // هنا يمكنك تغيير id الفيلم أو المسلسل
+    const mediaIds = ['tt0800069']; // يمكنك تغيير id الفيلم أو المسلسل أو الأنمي هنا
 
     mediaIds.forEach(mediaId => {
         const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
@@ -121,7 +121,7 @@
                     const tmdbMovieId = data.movie_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
                     displayMediaDetails(tmdbApiUrl, 'movie');
-                } else if (data.tv_results.length > 0) { // إذا كانت البيانات تخص مسلسل
+                } else if (data.tv_results.length > 0) { // إذا كانت البيانات تخص مسلسل أو أنمي
                     const tmdbTvId = data.tv_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
                     displayMediaDetails(tmdbApiUrl, 'tv');
@@ -148,27 +148,25 @@
                 `;
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
 
-                if (type === 'movie') { // إذا كانت البيانات تخص فيلم
-                    const trailerUrl = `https://api.themoviedb.org/3/movie/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
-                    fetch(trailerUrl)
+                if (type === 'movie' || type === 'tv') { // إذا كانت البيانات تخص فيلم أو مسلسل أو أنمي
+                    const videoType = type === 'movie' ? 'movie' : 'tv';
+                    const videoUrl = `https://api.themoviedb.org/3/${videoType}/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
+                    fetch(videoUrl)
                         .then(response => response.json())
                         .then(data => {
                             if (data.results.length > 0) {
-                                const trailerKey = data.results[0].key;
-                                const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
-                                const trailerContainer = document.getElementById('trailerContainer');
-                                trailerContainer.innerHTML = `
-                                    <h3>أعلان الفيلم</h3>
-                                    <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+                                const videoKey = data.results[0].key;
+                                const videoEmbedUrl = `https://www.youtube.com/embed/${videoKey}`;
+                                const videoContainer = document.getElementById('videoContainer');
+                                videoContainer.innerHTML = `
+                                    <h3>فيديو ${type === 'movie' ? 'الفيلم' : 'المسلسل أو الأنمي'}</h3>
+                                    <iframe width="560" height="315" src="${videoEmbedUrl}" frameborder="0" allowfullscreen></iframe>
                                 `;
                             } else {
-                                console.error('No trailer found for this movie.');
+                                console.error('No video found for this media.');
                             }
                         })
-                        .catch(error => console.error('Error fetching movie trailer:', error));
-                } else if (type === 'tv') { // إذا كانت البيانات تخص مسلسل
-                    // يمكنك إضافة عرض الإعلانات الخاصة بالمسلسل هنا
-                    console.log('TV Show Detected');
+                        .catch(error => console.error('Error fetching media video:', error));
                 }
             })
             .catch(error => console.error('Error fetching media details:', error));
