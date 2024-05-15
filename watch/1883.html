@@ -137,27 +137,32 @@
                         <p><strong>Story:</strong> ${data.overview}</p>
                     </div>
                 `;
+
+                const container = document.createElement('div');
+                container.classList.add('container');
+                container.innerHTML = `
+                    <img class="movie-poster" src="${posterUrl}" alt="Movie Poster">
+                    <div class="movie-info">${mediaInfo}</div>
+                `;
+                document.body.appendChild(container);
+
                 const trailerUrl = `https://api.themoviedb.org/3/${data.hasOwnProperty('title') ? 'movie' : 'tv'}/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
 
                 fetch(trailerUrl)
                     .then(response => response.json())
                     .then(data => {
-                        const trailerKey = data.results[0].key;
-                        const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
-                        const trailerContainer = document.createElement('div');
-                        trailerContainer.innerHTML = `
-                            <h3>أعلان ${data.hasOwnProperty('title') ? 'الفيلم' : 'المسلسل'}</h3>
-                            <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
-                        `;
-
-                        const container = document.createElement('div');
-                        container.classList.add('container');
-                        container.innerHTML = `
-                            <img class="movie-poster" src="${posterUrl}" alt="Movie Poster">
-                            <div class="movie-info">${mediaInfo}</div>
-                        `;
-                        container.appendChild(trailerContainer);
-                        document.body.appendChild(container);
+                        if (data.results.length > 0) {
+                            const trailerKey = data.results[0].key;
+                            const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
+                            const trailerContainer = document.createElement('div');
+                            trailerContainer.innerHTML = `
+                                <h3>أعلان ${data.hasOwnProperty('title') ? 'الفيلم' : 'المسلسل'}</h3>
+                                <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+                            `;
+                            document.body.appendChild(trailerContainer);
+                        } else {
+                            console.error('No trailer found for this media.');
+                        }
                     })
                     .catch(error => console.error('Error fetching media trailer:', error));
             })
@@ -166,21 +171,6 @@
     
       
 </script>
+
 <div class="container">
-    <div id="movieInfo" class="movie-info"></div>
-    <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
-    <h2>مشاهدة الفيلم</h2>
-    <iframe src="https://vidsrc.to/embed/tv/tt14674086" frameborder="0" allowfullscreen></iframe>
-    <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
-    <br>[ Arabic ] و اختار كلمة 
-    <br> و اختار الترجمة المناسبة ، قم بتغيير الترجمة اذا في تاخير او تسريع 
-    <br> اذا لم تجد الترجمة المناسبة وجميع الترجمات العربية متاخرة او مسرعة او السيرفر لا يعمل  أرجوك قم بنسخ الرابط وأرسله لنا بسرعة لتغييره  
-    <br>  من خلال الذهاب الى صفحة اتصل بنا
-        </h3>
-    
-    <a href="../../Movies">رجوع</a>
-</div>
-
-
-</body>
-</html>
+    <h2>م
