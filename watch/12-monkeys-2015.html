@@ -146,10 +146,6 @@
         .then(data => {
             const imdbRating = (Math.round(data.vote_average * 10) / 10).toFixed(1);
             const trimmedOverview = data.overview.trim();
-            const preferredLanguage = navigator.language.startsWith('en') ? 'en' : 'ar';
-            const storyLanguage = data.overview_lang || 'en'; // يستخدم مفتاح "overview_lang" للتحقق من لغة القصة
-            const story = storyLanguage === preferredLanguage ? trimmedOverview : data.overview; // استخدم القصة بلغة المستخدم المفضلة إذا كانت متاحة بنفس اللغة
-
             const mediaInfo = `
                 <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
                 <h2 class="movie-title">${data.title || data.name}</h2>
