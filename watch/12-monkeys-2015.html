@@ -150,12 +150,8 @@
                 const videoType = type === 'movie' ? 'movie' : 'tv';
                 const videoUrl = `https://api.themoviedb.org/3/${videoType}/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
                 fetch(videoUrl)
-                    .then(response => {
-                        console.log('Response status:', response.status);
-                        return response.json();
-                    })
+                    .then(response => response.json())
                     .then(videoData => {
-                        console.log('Video data:', videoData);
                         if (videoData.results.length > 0) {
                             const videoKey = videoData.results[0].key;
                             const videoEmbedUrl = `https://www.youtube.com/embed/${videoKey}`;
