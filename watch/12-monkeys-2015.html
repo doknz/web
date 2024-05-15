@@ -108,15 +108,10 @@
 </div>
 
 <script>
-    const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const mediaIds = 'tt1179933'; // Example IMDb movie ID (Arabic movie "خط الموت")
-    const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
+  const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
+    const mediaIds = ['tt0409591']; // هنا يمكنك تغيير id الفيلم أو المسلسل
 
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const tmdbMovieId = data.movie_results[0].id;
-            mediaIds.forEach(mediaId => {
+    mediaIds.forEach(mediaId => {
         const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
 
         fetch(apiUrl)
