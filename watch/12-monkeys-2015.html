@@ -148,12 +148,12 @@
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
 
                 const videoType = type === 'movie' ? 'movie' : 'tv';
-                const videoUrl = `https://api.themoviedb.org/3/${videoType}/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
+                const videoUrl = `https://api.themoviedb.org/3/${videoType}/${data.id}?api_key=${tmdbApiKey}&append_to_response=videos`;
                 fetch(videoUrl)
                     .then(response => response.json())
                     .then(videoData => {
-                        if (videoData.results.length > 0) {
-                            const videoKey = videoData.results[0].key;
+                        if (videoData.videos.results.length > 0) {
+                            const videoKey = videoData.videos.results[0].key;
                             const videoEmbedUrl = `https://www.youtube.com/embed/${videoKey}`;
                             const videoContainer = document.getElementById('videoContainer');
                             videoContainer.innerHTML = `
