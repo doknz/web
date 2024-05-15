@@ -104,7 +104,7 @@
 
     <div id="movieInfo" class="movie-info"></div>
     <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
-    <h2>مشاهدة المسلسل</h2>
+    <h2>مشاهدة الفيلم</h2>
     <iframe src="https://vidsrc.me/embed/movie?imdb=tt1179933" frameborder="0" allowfullscreen></iframe>
     <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
 <br>[ Arabic ] و اختار كلمة 
@@ -166,7 +166,7 @@ function displayMediaDetails(apiUrl, type) {
                         const videoEmbedUrl = `https://www.youtube.com/embed/${videoKey}`;
                         const trailerContainer = document.getElementById('trailerContainer');
                         trailerContainer.innerHTML = `
-                            <h3>أعلان المسلسل</h3>
+                            <h3>أعلان الفيلم</h3>
                             <iframe width="560" height="315" src="${videoEmbedUrl}" frameborder="0" allowfullscreen></iframe>
                         `;
                     } else {
