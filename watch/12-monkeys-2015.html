@@ -86,9 +86,10 @@
         }
         
         .story {
-    margin: 0;
-    padding: 0;
-    white-space: pre-wrap; /* يضمن عرض النص بنفس التنسيق داخل وسم الـ <pre> */
+    font-size: 14px; /* حجم الخط المناسب */
+    margin: 0; /* إزالة الهامش الافتراضي */
+    padding: 0; /* إزالة التباعد الافتراضي */
+    white-space: pre-wrap; /* يضمن عرض النص بنفس التنسيق داخل وسم الـ <span> */
 }
         
     </style>
@@ -150,8 +151,7 @@ const mediaInfo = `
     <div class="movie-details">
         <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
         <p><strong>IMDB:</strong> ${imdbRating}/10</p>
-        <p><strong>Story:</strong></p>
-        <pre class="story">${trimmedOverview}</pre>
+        <p><strong>Story:</strong> <span class="story">${trimmedOverview}</span></p>
     </div>
 `;
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
