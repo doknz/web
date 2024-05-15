@@ -146,6 +146,7 @@
         .then(data => {
             const imdbRating = (Math.round(data.vote_average * 10) / 10).toFixed(1);
             const trimmedOverview = data.overview.trim();
+            const storyLanguage = data.overview_lang || 'en';
             const mediaInfo = `
                 <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
                 <h2 class="movie-title">${data.title || data.name}</h2>
