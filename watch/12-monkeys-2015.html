@@ -147,7 +147,7 @@
                 const trimmedOverview = data.overview.trim();
 const mediaInfo = `
     <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
-    <h2 class="movie-title">${navigator.language.startsWith('en') ? data.title || data.name : data.title || data.name}</h2>
+    <h2 class="movie-title">${navigator.language.startsWith('en') ? (data.title || data.name) : (data.original_title || data.name)}</h2>
     <div class="movie-details">
         <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
         <p><strong>IMDB:</strong> ${imdbRating}/10</p>
