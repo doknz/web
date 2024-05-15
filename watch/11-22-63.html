@@ -4,7 +4,7 @@
     <title>movieloz</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="أحدث الأفلام والمسلسلات">
+    <meta name="description" content="لأحدث الافلام و المسلسلات">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,45 +84,39 @@
             font-size: 24px;
             margin-bottom: 10px;
         }
-
-        .trailer-container {
-            margin-top: 20px;
-        }
-
-        .trailer-container iframe {
-            width: 100%;
-            height: 315px;
-        }
+        
+        .story {
+    font-size: 16px; /* حجم الخط المناسب */
+    margin: 0; /* إزالة الهامش الافتراضي */
+    padding: 0; /* إزالة التباعد الافتراضي */
+    white-space: pre-wrap; /* يضمن عرض النص بنفس التنسيق داخل وسم الـ <span> */
+}
+        
     </style>
 </head>
-
 <body>
 <header>
     <h1>movieloz</h1>
 </header>
 
 <div class="container">
-    <!-- تعرض هنا معلومات الفيلم أو المسلسل -->
+    <img id="moviePoster" class="movie-poster" src="" alt="Movie Poster">
     <div id="movieInfo" class="movie-info"></div>
-    <!-- تعرض هنا معلومات الفيلم -->
-    <div id="trailerContainer" class="trailer-container"></div>
-    <!-- تعرض هنا مشاهدة المسلسل -->
-    <h2>مشاهدة المسلسل</h2>
-    <!-- تعرض هنا الفيديو -->
-    <iframe src="https://vidsrc.me/embed/tv?imdb=tt2879552" frameborder="0" allowfullscreen></iframe>
-    <!-- نص الإرشادات -->
+    <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
+    <h2>مشاهدة الفيلم</h2>
+    <iframe src="https://vidsrc.me/embed/movie?imdb=tt1179933" frameborder="0" allowfullscreen></iframe>
     <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
     <br>[ Arabic ] و اختار كلمة 
-    <br>للتغير الى الحلقات والمواسم 
-    <br>اضغط على المربع الموجود 
-    <br>في أعلى يسار المشغل </h3>
-    <!-- الرابط للعودة -->
-    <a href="../Series">رجوع</a>
+    <br> و اختار الترجمة المناسبة ، قم بتغيير الترجمة اذا في تاخير او تسريع 
+    <br> اذا لم تجد الترجمة المناسبة وجميع الترجمات العربية متاخرة او مسرعة او السيرفر لا يعمل  أرجوك قم بنسخ الرابط وأرسله لنا بسرعة لتغييره  
+    <br>  من خلال الذهاب الى صفحة اتصل بنا
+        </h3>
+    
+    <a href="../../Movies">رجوع</a>
 </div>
-
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const mediaIds = ['tt0409591']; // هنا يمكنك تغيير id الفيلم أو المسلسل
+    const mediaIds = ['tt2879552']; // يمكنك تغيير id الفيلم أو المسلسل أو الأنمي هنا
 
     mediaIds.forEach(mediaId => {
         const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
@@ -130,11 +124,11 @@
         fetch(apiUrl)
             .then(response => response.json())
             .then(data => {
-                if (data.movie_results.length > 0) { // إذا كانت البيانات تخص فيلم
+                if (data.movie_results.length > 0) { // If the data is for a movie
                     const tmdbMovieId = data.movie_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}?api_key=${tmdbApiKey}&language=en`;
                     displayMediaDetails(tmdbApiUrl, 'movie');
-                } else if (data.tv_results.length > 0) { // إذا كانت البيانات تخص مسلسل
+                } else if (data.tv_results.length > 0) { // If the data is for a series or anime
                     const tmdbTvId = data.tv_results[0].id;
                     const tmdbApiUrl = `https://api.themoviedb.org/3/tv/${tmdbTvId}?api_key=${tmdbApiKey}&language=en`;
                     displayMediaDetails(tmdbApiUrl, 'tv');
@@ -150,43 +144,39 @@
             .then(response => response.json())
             .then(data => {
                 const imdbRating = (Math.round(data.vote_average * 10) / 10).toFixed(1);
-                const mediaInfo = `
-                    <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
-                    <h2 class="movie-title">${data.title || data.name}</h2>
-                    <div class="movie-details">
-                        <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
-                        <p><strong>IMDB:</strong> ${imdbRating}/10</p>
-                        <p><strong>Story:</strong> ${data.overview}</p>
-                    </div>
-                `;
+                const trimmedOverview = data.overview.trim();
+const mediaInfo = `
+    <img class="movie-poster" src="https://image.tmdb.org/t/p/w500/${data.poster_path}" alt="Movie Poster">
+    <h2 class="movie-title">${data.title || data.name}</h2>
+    <div class="movie-details">
+        <p><strong>Genre:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+        <p><strong>IMDB:</strong> ${imdbRating}/10</p>
+        <p><strong>Story:</strong> <span class="story">${trimmedOverview}</span></p>
+    </div>
+`;
                 document.getElementById('movieInfo').innerHTML = mediaInfo;
 
-                if (type === 'movie') { // إذا كانت البيانات تخص فيلم
-                    const trailerUrl = `https://api.themoviedb.org/3/movie/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
-                    fetch(trailerUrl)
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.results.length > 0) {
-                                const trailerKey = data.results[0].key;
-                                const trailerEmbedUrl = `https://www.youtube.com/embed/${trailerKey}`;
-                                const trailerContainer = document.getElementById('trailerContainer');
-                                trailerContainer.innerHTML = `
-                                    <h3>أعلان الفيلم</h3>
-                                    <iframe width="560" height="315" src="${trailerEmbedUrl}" frameborder="0" allowfullscreen></iframe>
-                                `;
-                            } else {
-                                console.error('No trailer found for this movie.');
-                            }
-                        })
-                        .catch(error => console.error('Error fetching movie trailer:', error));
-                } else if (type === 'tv') { // إذا كانت البيانات تخص مسلسل
-                    // يمكنك إضافة عرض الإعلانات الخاصة بالمسلسل هنا
-                    console.log('TV Show Detected');
-                }
+                const videoType = type === 'movie' ? 'movie' : 'tv';
+                const videoUrl = `https://api.themoviedb.org/3/${videoType}/${data.id}?api_key=${tmdbApiKey}&append_to_response=videos`;
+                fetch(videoUrl)
+                    .then(response => response.json())
+                    .then(videoData => {
+                        if (videoData.videos.results.length > 0) {
+                            const videoKey = videoData.videos.results[0].key;
+                            const videoEmbedUrl = `https://www.youtube.com/embed/${videoKey}`;
+                            const trailerContainer = document.getElementById('trailerContainer');
+                            trailerContainer.innerHTML = `
+                                <h3>Video ${type === 'movie' ? 'Trailer' : 'Preview'}</h3>
+                                <iframe width="560" height="315" src="${videoEmbedUrl}" frameborder="0" allowfullscreen></iframe>
+                            `;
+                        } else {
+                            console.error('No video found for this media.');
+                        }
+                    })
+                    .catch(error => console.error('Error fetching media video:', error));
             })
             .catch(error => console.error('Error fetching media details:', error));
     }
 </script>
 </body>
 </html>
-
