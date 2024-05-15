@@ -109,7 +109,7 @@
 
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-    const imdbMovieId = 'tt1179933'; // Example IMDb movie ID (Arabic movie "خط الموت")
+    const imdbMovieId = 'tt0963794'; // Example IMDb movie ID (Arabic movie "خط الموت")
     const apiUrl = `https://api.themoviedb.org/3/find/${imdbMovieId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
 
     fetch(apiUrl)
@@ -135,7 +135,7 @@
                     document.getElementById('movieInfo').innerHTML = movieInfo;
 
                     // Fetch movie trailer
-                    const trailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=en`;
+                    const trailerUrl = `https://api.themoviedb.org/3/movie/${tmdbMovieId}/videos?api_key=${tmdbApiKey}&language=ar`;
                     fetch(trailerUrl)
                         .then(response => response.json())
                         .then(data => {
