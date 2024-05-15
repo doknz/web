@@ -104,8 +104,8 @@
 
     <div id="movieInfo" class="movie-info"></div>
     <div id="trailerContainer" class="trailer-container"></div> <!-- هنا يتم عرض الفيديو -->
-    <h2>مشاهدة الفيلم</h2>
-    <iframe src="https://vidsrc.me/embed/movie?imdb=tt1179933" frameborder="0" allowfullscreen></iframe>
+    <h2>مشاهدة المسلسل</h2>
+    <iframe src="https://vidsrc.me/embed/movie?imdb=tt3148266" frameborder="0" allowfullscreen></iframe>
     <h3>اذا لم تظهر الترجمة العربية<br>[cc] اضغط على مربع  
     <br>[ Arabic ] و اختار كلمة 
     <br> و اختار الترجمة المناسبة ، قم بتغيير الترجمة اذا في تاخير او تسريع 
@@ -113,11 +113,11 @@
     <br>  من خلال الذهاب الى صفحة اتصل بنا
         </h3>
     
-    <a href="../../Movies">رجوع</a>
+    <a href="../../Series">رجوع</a>
 </div>
 <script>
     const tmdbApiKey = 'cf64a661774f647b7513facb9f1e55e5';
-const mediaIds = ['tt0388629']; // يمكنك تغيير id الفيلم أو المسلسل أو الأنمي هنا
+const mediaIds = ['tt3148266']; // يمكنك تغيير id الفيلم أو المسلسل أو الأنمي هنا
 
 mediaIds.forEach(mediaId => {
     const apiUrl = `https://api.themoviedb.org/3/find/${mediaId}?api_key=${tmdbApiKey}&language=en&external_source=imdb_id`;
