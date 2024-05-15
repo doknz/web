@@ -152,9 +152,9 @@
                 const videoUrl = `https://api.themoviedb.org/3/${videoType}/${data.id}/videos?api_key=${tmdbApiKey}&language=en`;
                 fetch(videoUrl)
                     .then(response => response.json())
-                    .then(data => {
-                        if (data.results.length > 0) {
-                            const videoKey = data.results[0].key;
+                    .then(videoData => {
+                        if (videoData.results.length > 0) {
+                            const videoKey = videoData.results[0].key;
                             const videoEmbedUrl = `https://www.youtube.com/embed/${videoKey}`;
                             const videoContainer = document.getElementById('videoContainer');
                             videoContainer.innerHTML = `
